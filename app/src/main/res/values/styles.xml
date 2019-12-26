@@ -1,11 +1,21 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textViewStyle">@style/VazirTextViewStyle</item>
+        <item name="buttonStyle">@style/VazirButtonStyle</item>
+    </style>
+
+    <style name="VazirTextViewStyle" parent="android:Widget.TextView">
+        <item name="fontFamily">@font/vazirlight</item>
+    </style>
+
+    <style name="VazirButtonStyle" parent="android:Widget.Holo.Button">
+        <item name="fontFamily">@font/vazirlight</item>
     </style>
 
 </resources>

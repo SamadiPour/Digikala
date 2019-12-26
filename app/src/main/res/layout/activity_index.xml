@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".view.activities.IndexActivity">
+
+    <include layout="@layout/toolbar_actionbar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.smarteist.autoimageslider.SliderView
+                android:id="@+id/imageSlider_banners"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                app:sliderAnimationDuration="600"
+                app:sliderCircularHandlerEnabled="true"
+                app:sliderIndicatorAnimationDuration="600"
+                app:sliderIndicatorGravity="center_horizontal|bottom"
+                app:sliderIndicatorMargin="15dp"
+                app:sliderIndicatorOrientation="horizontal"
+                app:sliderIndicatorPadding="3dp"
+                app:sliderIndicatorRadius="1.5dp"
+                app:sliderIndicatorSelectedColor="#FFF"
+                app:sliderIndicatorUnselectedColor="#5A5A5A"
+                app:sliderScrollTimeInSec="1" />
+
+            <androidx.legacy.widget.Space
+                android:layout_width="wrap_content"
+                android:layout_height="10dp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/chipsView_productCategories"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layoutDirection="rtl"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+            <androidx.legacy.widget.Space
+                android:layout_width="wrap_content"
+                android:layout_height="15dp" />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1">
+
+                    <!--todo:should be timer-->
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/specialOffer_bannerImage"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/typeface_specialoffer" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.legacy.widget.Space
+                android:layout_width="wrap_content"
+                android:layout_height="10dp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/specialOffer_productList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+            <androidx.legacy.widget.Space
+                android:layout_width="wrap_content"
+                android:layout_height="10dp" />
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/firstFullScreenBanner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <GridLayout
+                android:id="@+id/bannersGridLayout"
+                android:layout_width="match_parent"
+                android:columnCount="2"
+                android:layout_height="wrap_content" />
+
+            <androidx.legacy.widget.Space
+                android:layout_width="wrap_content"
+                android:layout_height="10dp" />
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/secondFullScreenBanner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <androidx.legacy.widget.Space
+                android:layout_width="wrap_content"
+                android:layout_height="20dp" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </ScrollView>
+</androidx.appcompat.widget.LinearLayoutCompat>
