@@ -22,7 +22,7 @@ object RetrofitConfig {
 
     fun retrofit(): Retrofit {
         val logger = HttpLoggingInterceptor()
-        logger.level = HttpLoggingInterceptor.Level.HEADERS
+        logger.level = HttpLoggingInterceptor.Level.BASIC
 
         val okHttpClient = OkHttpClient.Builder()
             .readTimeout(20, TimeUnit.SECONDS)

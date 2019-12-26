@@ -17,10 +17,14 @@ class CategoryViewModel(
     private val job = SupervisorJob()
     private val coroutineContext = Dispatchers.IO + job
     private var fetched = false
-    var data = MutableLiveData<CategoriesModel>()
+
+    //to have it all the times
+    companion object {
+        var data = MutableLiveData<CategoriesModel>()
+    }
 
     fun getMainCategories() {
-        if (!fetched){
+        if (!fetched) {
             viewModelScope.launch(coroutineContext) {
                 val response = categoryRepository.getMainCategories()
                 data.postValue(response)

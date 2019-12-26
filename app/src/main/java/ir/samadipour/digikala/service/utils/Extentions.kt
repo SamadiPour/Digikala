@@ -2,10 +2,12 @@ package ir.samadipour.digikala.service.utils
 
 import android.app.Activity
 import android.content.Context
+import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
@@ -82,6 +84,10 @@ fun View.switchVisibility() {
         View.VISIBLE
     else
         View.GONE
+}
+
+fun TextView.strickThrout() {
+    paintFlags = paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
 }
 
 fun ViewGroup.inflate(@LayoutRes layoutRes: Int): View {

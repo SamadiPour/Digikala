@@ -6,4 +6,6 @@
     <color name="digikalaRed">#FC344C</color>
     <color name="white">#FFFFFF</color>
     <color name="green">#3ACE4F</color>
+    <color name="black">#000000</color>
+    <color name="grey">#a3a3a3</color>
 </resources>
