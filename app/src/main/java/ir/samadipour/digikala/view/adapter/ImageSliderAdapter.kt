@@ -32,7 +32,7 @@ class ImageSliderAdapter : SliderViewAdapter<ImageSliderAdapter.SliderAdapterVH>
 
         fun bind(banner: Banner) {
             imageView.apply {
-//                hierarchy.setPlaceholderImage(R.drawable.ic_dk)
+                hierarchy.setPlaceholderImage(R.drawable.alt_500px)
                 setImageURI(banner.bannerPathMobile)
             }
 

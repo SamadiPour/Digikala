@@ -6,6 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
     android:background="@color/white"
+    android:layoutDirection="rtl"
     app:cardCornerRadius="5dp">
 
     <LinearLayout
@@ -14,16 +15,17 @@
         android:orientation="vertical">
 
         <com.facebook.drawee.view.SimpleDraweeView
-            android:id="@+id/offerImage"
-            android:layout_width="160dp"
-            android:layout_height="170dp"
+            android:id="@+id/productSmallGrid_imageView"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="15dp"
-            app:placeholderImage="@drawable/ic_holder"
-            app:placeholderImageScaleType="center" />
+            app:placeholderImage="@drawable/alt_500px"
+            app:placeholderImageScaleType="centerInside"
+            app:viewAspectRatio="1" />
 
         <TextView
-            android:id="@+id/offerTitle"
+            android:id="@+id/productSmallGrid_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:lines="2"
@@ -37,31 +39,36 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="7dp"
             android:background="@color/grey" />
 
         <TextView
-            android:id="@+id/offerMaxPrice"
+            android:id="@+id/productSmallGrid_topPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:layout_marginStart="5dp"
+            android:layout_gravity="end"
+            android:layout_marginEnd="5dp"
             android:textColor="@color/digikalaRed"
+            android:textSize="11sp"
             android:textStyle="normal"
-            android:visibility="gone"
-            tools:text="۲۵۰۰۰۰۰۰ تومان" />
+            android:visibility="visible"
+            tools:text="25000000 تومان" />
 
         <TextView
-            android:id="@+id/offerMinPrice"
+            android:id="@+id/productSmallGrid_lowPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:layout_marginStart="5dp"
-            android:layout_marginBottom="10dp"
+            android:layout_gravity="end"
+            android:textSize="13sp"
+            android:layout_marginEnd="5dp"
             android:textColor="@color/green"
             android:textStyle="normal"
-            tools:text="۲۵۰۰۰۰۰۰ تومان" />
+            tools:text="1000000 تومان" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="5dp" />
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>

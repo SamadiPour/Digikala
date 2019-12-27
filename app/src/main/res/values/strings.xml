@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Digikala</string>
     <string name="no_browser_found">مرورگری پیدا نشد</string>
+    <string name="price_text">%1$s تومان</string>
+    <string name="top_sale_title_text_view">محصولات پرفروش</string>
+    <string name="newest_product_title_text_view">جدیدترین محصولات</string>
 </resources>

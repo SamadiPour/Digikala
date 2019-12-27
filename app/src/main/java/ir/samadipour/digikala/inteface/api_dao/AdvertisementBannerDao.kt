@@ -11,13 +11,13 @@ import retrofit2.http.Query
 
 interface AdvertisementBannerDao {
 
-    @GET("Banner/GetBanner")
+    @GET("api/Banner/GetBanner")
     suspend fun getMainBanners(
         @Query("bannerType") type: String, //Advertisement, Slider
         @HeaderMap headerMaps: Map<String, String> = RetrofitConfig.headers
     ): Response<MainBannerModel>
 
-    @GET("Banner/GetMobileBanner")
+    @GET("api/Banner/GetMobileBanner")
     suspend fun getMidScreenBanners(
         @HeaderMap headerMaps: Map<String, String> = RetrofitConfig.headers
     ): Response<MidScreenBannerModel>

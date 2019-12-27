@@ -12,11 +12,14 @@ import ir.samadipour.digikala.service.utils.DisplayTools
 import ir.samadipour.digikala.service.utils.InjectUtils
 import ir.samadipour.digikala.view.adapter.CategoryChipsAdapter
 import ir.samadipour.digikala.view.adapter.ImageSliderAdapter
+import ir.samadipour.digikala.view.adapter.ProductListAdapter
+import ir.samadipour.digikala.view.adapter.SpecialOfferAdapter
 import ir.samadipour.digikala.viewmodel.CategoryViewModel
 import ir.samadipour.digikala.viewmodel.IndexActivityViewModel
 import kotlinx.android.synthetic.main.activity_index.*
 import kotlinx.android.synthetic.main.list_item_card_image_large.view.*
 import kotlinx.android.synthetic.main.list_item_card_image_small.view.*
+import kotlinx.android.synthetic.main.row_title_of_product_list.view.*
 
 
 class IndexActivity : AppCompatActivity() {
@@ -28,12 +31,12 @@ class IndexActivity : AppCompatActivity() {
 
         val indexViewModel = ViewModelProvider(
             this,
-            InjectUtils.getIndexActivityViewModelInstance(application)
+            InjectUtils.getIndexActivityViewModelInstance()
         ).get(IndexActivityViewModel::class.java)
 
         val categoryViewModel = ViewModelProvider(
             this,
-            InjectUtils.getCategoryViewModelInstance(application)
+            InjectUtils.getCategoryViewModelInstance()
         ).get(CategoryViewModel::class.java)
         categoryViewModel.getMainCategories()
 
@@ -80,6 +83,41 @@ class IndexActivity : AppCompatActivity() {
         indexViewModel.getMidScreenBanner().observe(this, Observer {
             bindBanners(it)
         })
+
+        //incredible offers
+        val specialOfferAdapter = SpecialOfferAdapter()
+        specialOffer_productList.adapter = specialOfferAdapter
+        indexViewModel.getIncredibleOffers().observe(this, Observer {
+            if (it != null)
+                specialOfferAdapter.submit(it.data)
+        })
+
+        //TopSales
+        topSale_rowList.rowTitleProductList_title.text =
+            getString(R.string.top_sale_title_text_view)
+        val topSalesAdapter = ProductListAdapter(isGone = true, showDiscounted = false)
+        topSale_productList.adapter = topSalesAdapter
+        topSale_rowList.rowTitleProductList_more.setOnClickListener {
+
+        }
+
+        //Newest Products
+        newestProducts_rowList.rowTitleProductList_title.text =
+            getString(R.string.newest_product_title_text_view)
+        val newestProductsAdapter = ProductListAdapter(isGone = true, showDiscounted = false)
+        newestProducts_productList.adapter = newestProductsAdapter
+        newestProducts_rowList.rowTitleProductList_more.setOnClickListener {
+
+        }
+
+        //setting TopSales and Newest data
+        indexViewModel.getGeneralProducts().observe(this, Observer {
+            if (it != null) {
+                topSalesAdapter.submit(it.responses[0].hits.hits)
+                newestProductsAdapter.submit(it.responses[1].hits.hits)
+            }
+        })
+
     }
 
     private fun bindBanners(it: MidScreenBannerModel) {

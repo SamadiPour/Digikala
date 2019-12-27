@@ -18,9 +18,9 @@ object RetrofitConfig {
         "MobileApp/Android/v-47/503eaa6d3af99023"
     )
 
-    private const val url = "https://service2.digikala.com/api/"
+    private const val url = "https://service2.digikala.com/"
 
-    fun retrofit(): Retrofit {
+    fun serviceRetrofit(): Retrofit {
         val logger = HttpLoggingInterceptor()
         logger.level = HttpLoggingInterceptor.Level.BASIC
 

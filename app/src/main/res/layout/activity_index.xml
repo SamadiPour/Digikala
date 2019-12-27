@@ -83,6 +83,7 @@
                 android:id="@+id/specialOffer_productList"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layoutDirection="rtl"
                 android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
@@ -118,7 +119,44 @@
 
             <androidx.legacy.widget.Space
                 android:layout_width="wrap_content"
+                android:layout_height="30dp" />
+
+            <include
+                android:id="@+id/topSale_rowList"
+                layout="@layout/row_title_of_product_list" />
+
+            <androidx.legacy.widget.Space
+                android:layout_width="wrap_content"
+                android:layout_height="10dp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/topSale_productList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layoutDirection="rtl"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+            <androidx.legacy.widget.Space
+                android:layout_width="wrap_content"
                 android:layout_height="20dp" />
+
+            <include
+                android:id="@+id/newestProducts_rowList"
+                layout="@layout/row_title_of_product_list" />
+
+            <androidx.legacy.widget.Space
+                android:layout_width="wrap_content"
+                android:layout_height="10dp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/newestProducts_productList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layoutDirection="rtl"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
 
         </androidx.appcompat.widget.LinearLayoutCompat>
     </ScrollView>

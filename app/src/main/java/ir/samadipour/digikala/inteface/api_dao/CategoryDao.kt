@@ -9,7 +9,7 @@ import retrofit2.http.HeaderMap
 
 interface CategoryDao {
 
-    @GET("Category/GetMainMenu")
+    @GET("api/Category/GetMainMenu")
     suspend fun getMainCategories(
         @HeaderMap headerMaps: Map<String, String> = RetrofitConfig.headers
     ): Response<CategoriesModel>

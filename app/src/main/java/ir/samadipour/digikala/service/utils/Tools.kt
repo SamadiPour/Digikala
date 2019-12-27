@@ -49,8 +49,9 @@ object DisplayTools {
         return displayMetrics.widthPixels / divideBy
     }
 
-    fun priceFormatter(price: Int): String {
-        return NumberFormat.getNumberInstance(Locale.getDefault()).format(price)
+    fun priceFormatter(price: Int, isRial: Boolean = true): String {
+        return NumberFormat.getNumberInstance(Locale("fa"))
+            .format(if (isRial) price / 10 else price)
     }
 
     fun switchVisibility(
