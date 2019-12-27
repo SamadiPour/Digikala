@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group
+        android:id="@+id/group1"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/menuHome"
+            android:icon="@drawable/ic_home"
+            android:title="خانه" />
+        <item
+            android:id="@+id/menuCategory"
+            android:icon="@drawable/ic_list"
+            android:title="لیست دسته بندی محصولات" />
+    </group>
+    <group
+        android:id="@+id/group2"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/menuBasket"
+            android:icon="@drawable/ic_basket"
+            android:title="سبد خرید" />
+    </group>
+    <group
+        android:id="@+id/group3"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/menuMostSell"
+            android:icon="@drawable/ic_star"
+            android:title="پر فروش ترین ها" />
+        <item
+            android:id="@+id/menuOffer"
+            android:icon="@drawable/ic_star"
+            android:title="پیشنهاد ویژه دیجیکالا" />
+        <item
+            android:id="@+id/menuMostView"
+            android:icon="@drawable/ic_star"
+            android:title="پر بازدید ترین ها" />
+        <item
+            android:id="@+id/menuNews"
+            android:icon="@drawable/ic_star"
+            android:title="جدید ترین ها" />
+    </group>
+    <group
+        android:id="@+id/group4"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/menuSetting"
+            android:icon="@drawable/ic_settings"
+            android:title="تنظیمات" />
+        <item
+            android:id="@+id/menuQuestion"
+            android:icon="@drawable/ic_question"
+            android:title="سئوالات متداول" />
+        <item
+            android:id="@+id/menuAboutUs"
+            android:icon="@drawable/ic_dk"
+            android:title="درباره ما" />
+    </group>
+
+</menu>

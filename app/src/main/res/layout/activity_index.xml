@@ -1,163 +1,255 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/indexActivity_drawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".view.activities.IndexActivity">
+    android:fitsSystemWindows="true"
+    tools:context=".view.activities.IndexActivity"
+    tools:openDrawer="start">
 
-    <include layout="@layout/toolbar_actionbar" />
-
-    <ScrollView
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <androidx.appcompat.widget.LinearLayoutCompat
+        <include layout="@layout/toolbar_actionbar" />
+
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <com.smarteist.autoimageslider.SliderView
-                android:id="@+id/imageSlider_banners"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                app:sliderAnimationDuration="600"
-                app:sliderCircularHandlerEnabled="true"
-                app:sliderIndicatorAnimationDuration="600"
-                app:sliderIndicatorGravity="center_horizontal|bottom"
-                app:sliderIndicatorMargin="15dp"
-                app:sliderIndicatorOrientation="horizontal"
-                app:sliderIndicatorPadding="3dp"
-                app:sliderIndicatorRadius="1.5dp"
-                app:sliderIndicatorSelectedColor="#FFF"
-                app:sliderIndicatorUnselectedColor="#5A5A5A"
-                app:sliderScrollTimeInSec="1" />
-
-            <androidx.legacy.widget.Space
-                android:layout_width="wrap_content"
-                android:layout_height="10dp" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/chipsView_productCategories"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layoutDirection="rtl"
-                android:orientation="horizontal"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-
-            <androidx.legacy.widget.Space
-                android:layout_width="wrap_content"
-                android:layout_height="15dp" />
+            android:layout_height="match_parent">
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical">
+
+                <com.smarteist.autoimageslider.SliderView
+                    android:id="@+id/imageSlider_banners"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    app:sliderAnimationDuration="600"
+                    app:sliderCircularHandlerEnabled="true"
+                    app:sliderIndicatorAnimationDuration="600"
+                    app:sliderIndicatorGravity="center_horizontal|bottom"
+                    app:sliderIndicatorMargin="15dp"
+                    app:sliderIndicatorOrientation="horizontal"
+                    app:sliderIndicatorPadding="3dp"
+                    app:sliderIndicatorRadius="1.5dp"
+                    app:sliderIndicatorSelectedColor="#FFF"
+                    app:sliderIndicatorUnselectedColor="#5A5A5A"
+                    app:sliderScrollTimeInSec="1" />
+
+                <androidx.legacy.widget.Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="10dp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/chipsView_productCategories"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layoutDirection="rtl"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+                <androidx.legacy.widget.Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="15dp" />
 
                 <androidx.appcompat.widget.LinearLayoutCompat
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="1">
+                    android:orientation="horizontal">
 
-                    <!--todo:should be timer-->
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:paddingStart="15dp">
+
+                        <TextView
+                            android:id="@+id/hourCounterTextView"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/background_timer"
+                            android:gravity="center"
+                            android:text="12"
+                            android:textColor="@color/white"
+                            android:textSize="23sp" />
+
+                        <TextView
+                            android:id="@+id/firstDot"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:paddingLeft="3dp"
+                            android:paddingRight="3dp"
+                            android:text="@string/colon"
+                            android:textColor="#383838"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/minuteCounterTextView"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/background_timer"
+                            android:gravity="center"
+                            android:text="34"
+                            android:textColor="@color/white"
+                            android:textSize="23sp"/>
+
+                        <TextView
+                            android:id="@+id/secondDot"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:paddingLeft="3dp"
+                            android:paddingRight="3dp"
+                            android:text="@string/colon"
+                            android:textColor="#383838"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/secondCounterTextView"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/background_timer"
+                            android:gravity="center"
+                            android:text="56"
+                            android:textColor="@color/white"
+                            android:textSize="23sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintLeft_toRightOf="@id/secondDot"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/specialOffer_bannerImage"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_weight="1"
+                        android:src="@drawable/typeface_specialoffer" />
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/specialOffer_bannerImage"
-                    android:layout_width="0dp"
+                <androidx.legacy.widget.Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="10dp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/specialOffer_productList"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/typeface_specialoffer" />
+                    android:layoutDirection="rtl"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+                <androidx.legacy.widget.Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="10dp" />
+
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@+id/firstFullScreenBanner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:viewAspectRatio="3" />
+
+                <androidx.legacy.widget.Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp" />
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/bannersLinearLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" />
+
+                <androidx.legacy.widget.Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp" />
+
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@+id/secondFullScreenBanner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:viewAspectRatio="3" />
+
+                <androidx.legacy.widget.Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp" />
+
+                <include
+                    android:id="@+id/topSale_rowList"
+                    layout="@layout/row_product_list" />
+
+                <androidx.legacy.widget.Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp" />
+
+                <include
+                    android:id="@+id/newestProducts_rowList"
+                    layout="@layout/row_product_list" />
+
+                <androidx.legacy.widget.Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp" />
+
+                <include
+                    android:id="@+id/mobilePhone_rowList"
+                    layout="@layout/row_product_list" />
+
+                <androidx.legacy.widget.Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp" />
+
+                <include
+                    android:id="@+id/laptops_rowList"
+                    layout="@layout/row_product_list" />
+
+                <androidx.legacy.widget.Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp" />
+
+                <include
+                    android:id="@+id/homeAndKitchen_rowList"
+                    layout="@layout/row_product_list" />
+
+                <androidx.legacy.widget.Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp" />
+
+                <include
+                    android:id="@+id/digitalProduct_rowList"
+                    layout="@layout/row_product_list" />
+
             </androidx.appcompat.widget.LinearLayoutCompat>
+        </ScrollView>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
-            <androidx.legacy.widget.Space
-                android:layout_width="wrap_content"
-                android:layout_height="10dp" />
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/indexActivity_navigationView"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        android:fitsSystemWindows="true"
+        android:layoutDirection="rtl"
+        app:headerLayout="@layout/menu_main_header"
+        app:itemHorizontalPadding="20dp"
+        app:itemIconPadding="20dp"
+        app:menu="@menu/menu_main_item"
+        app:theme="@style/NavigationDrawerStyle" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/specialOffer_productList"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layoutDirection="rtl"
-                android:orientation="horizontal"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-
-            <androidx.legacy.widget.Space
-                android:layout_width="wrap_content"
-                android:layout_height="10dp" />
-
-            <com.facebook.drawee.view.SimpleDraweeView
-                android:id="@+id/firstFullScreenBanner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:viewAspectRatio="3" />
-
-            <androidx.legacy.widget.Space
-                android:layout_width="wrap_content"
-                android:layout_height="20dp" />
-
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:id="@+id/bannersLinearLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical" />
-
-            <androidx.legacy.widget.Space
-                android:layout_width="wrap_content"
-                android:layout_height="20dp" />
-
-            <com.facebook.drawee.view.SimpleDraweeView
-                android:id="@+id/secondFullScreenBanner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:viewAspectRatio="3" />
-
-            <androidx.legacy.widget.Space
-                android:layout_width="wrap_content"
-                android:layout_height="30dp" />
-
-            <include
-                android:id="@+id/topSale_rowList"
-                layout="@layout/row_title_of_product_list" />
-
-            <androidx.legacy.widget.Space
-                android:layout_width="wrap_content"
-                android:layout_height="10dp" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/topSale_productList"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layoutDirection="rtl"
-                android:orientation="horizontal"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-
-            <androidx.legacy.widget.Space
-                android:layout_width="wrap_content"
-                android:layout_height="20dp" />
-
-            <include
-                android:id="@+id/newestProducts_rowList"
-                layout="@layout/row_title_of_product_list" />
-
-            <androidx.legacy.widget.Space
-                android:layout_width="wrap_content"
-                android:layout_height="10dp" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/newestProducts_productList"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layoutDirection="rtl"
-                android:orientation="horizontal"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-
-
-        </androidx.appcompat.widget.LinearLayoutCompat>
-    </ScrollView>
-</androidx.appcompat.widget.LinearLayoutCompat>
+</androidx.drawerlayout.widget.DrawerLayout>

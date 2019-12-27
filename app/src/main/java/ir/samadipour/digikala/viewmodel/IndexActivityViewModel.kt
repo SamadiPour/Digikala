@@ -67,4 +67,15 @@ class IndexActivityViewModel(
         return data
     }
 
+    fun getTopListOfCategory(vararg category: Int): List<LiveData<ProductListModel>> {
+        val data = List<MutableLiveData<ProductListModel>>(category.size) { MutableLiveData() }
+        for (index in category.indices) {
+            viewModelScope.launch(coroutineContext) {
+                val response = productRepository.getTopListOfCategory("c${category[index]}")
+                data[index].postValue(response)
+            }
+        }
+        return data
+    }
+
 }

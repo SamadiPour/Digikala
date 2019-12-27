@@ -1,10 +1,15 @@
 package ir.samadipour.digikala.view.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.navigation.NavigationView
 import ir.samadipour.digikala.R
 import ir.samadipour.digikala.service.models.MidScreenBannerModel
 import ir.samadipour.digikala.service.utils.BannerClickListener
@@ -19,10 +24,13 @@ import ir.samadipour.digikala.viewmodel.IndexActivityViewModel
 import kotlinx.android.synthetic.main.activity_index.*
 import kotlinx.android.synthetic.main.list_item_card_image_large.view.*
 import kotlinx.android.synthetic.main.list_item_card_image_small.view.*
-import kotlinx.android.synthetic.main.row_title_of_product_list.view.*
+import kotlinx.android.synthetic.main.row_product_list.view.*
+import kotlinx.android.synthetic.main.toolbar_actionbar.*
+import kotlinx.android.synthetic.main.toolbar_actionbar.view.*
+import kotlin.math.floor
 
 
-class IndexActivity : AppCompatActivity() {
+class IndexActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     private lateinit var inflater: LayoutInflater
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,6 +55,11 @@ class IndexActivity : AppCompatActivity() {
             showSearch = true,
             showBasket = true
         )
+
+        toolbar.menuButton.setOnClickListener {
+            indexActivity_drawerLayout.openDrawer(indexActivity_navigationView)
+        }
+        indexActivity_navigationView.setNavigationItemSelectedListener(this)
 
         //banner slider
         val imageSliderAdapter = ImageSliderAdapter()
@@ -93,21 +106,25 @@ class IndexActivity : AppCompatActivity() {
         })
 
         //TopSales
-        topSale_rowList.rowTitleProductList_title.text =
-            getString(R.string.top_sale_title_text_view)
         val topSalesAdapter = ProductListAdapter(isGone = true, showDiscounted = false)
-        topSale_productList.adapter = topSalesAdapter
-        topSale_rowList.rowTitleProductList_more.setOnClickListener {
+        topSale_rowList.apply {
+            productListRow_productRecyclerView.adapter = topSalesAdapter
+            productListRow_titleTextView.text = getString(R.string.top_sale_title_text_view)
+            productListRow_moreButton.visibility = View.VISIBLE
+            productListRow_moreButton.setOnClickListener {
 
+            }
         }
 
         //Newest Products
-        newestProducts_rowList.rowTitleProductList_title.text =
-            getString(R.string.newest_product_title_text_view)
         val newestProductsAdapter = ProductListAdapter(isGone = true, showDiscounted = false)
-        newestProducts_productList.adapter = newestProductsAdapter
-        newestProducts_rowList.rowTitleProductList_more.setOnClickListener {
+        newestProducts_rowList.apply {
+            productListRow_productRecyclerView.adapter = newestProductsAdapter
+            productListRow_titleTextView.text = getString(R.string.newest_product_title_text_view)
+            productListRow_moreButton.visibility = View.VISIBLE
+            productListRow_moreButton.setOnClickListener {
 
+            }
         }
 
         //setting TopSales and Newest data
@@ -118,6 +135,30 @@ class IndexActivity : AppCompatActivity() {
             }
         })
 
+        //4 categories in below
+        val categoryNames = listOf(
+            "گوشی موبایل",
+            "لپ تاپ و الترابوک",
+            "خانه و آشپزخانه",
+            "کالای دیجیتال"
+        )
+        val viewsIdes = listOf(
+            mobilePhone_rowList,
+            laptops_rowList,
+            homeAndKitchen_rowList,
+            digitalProduct_rowList
+        )
+        val topProductOfCats = indexViewModel.getTopListOfCategory(11, 18, 6226, 5966)
+        for (index in topProductOfCats.indices) {
+            topProductOfCats[index].observe(this, Observer {
+                val adapter = ProductListAdapter(isGone = true, showDiscounted = false)
+                viewsIdes[index].apply {
+                    productListRow_productRecyclerView.adapter = adapter
+                    productListRow_titleTextView.text = categoryNames[index]
+                }
+                adapter.submit(it.responses[0].hits.hits)
+            })
+        }
     }
 
     private fun bindBanners(it: MidScreenBannerModel) {
@@ -129,7 +170,7 @@ class IndexActivity : AppCompatActivity() {
                         bannersLinearLayout,
                         false
                     )
-                view.itemList_imageView_large.setImageURI(it.data[1][i].bannerPathMobile)
+                view.itemList_imageView_large.setImageURI(it.data[1][floor(i / 2.0).toInt()].bannerPathMobile)
                 bannersLinearLayout.addView(view, i)
             } else {
                 val view =
@@ -143,5 +184,39 @@ class IndexActivity : AppCompatActivity() {
                 bannersLinearLayout.addView(view, i)
             }
         }
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+//        val activity: Any = IndexActivity::class.java
+        val bundle = Bundle()
+        when (item.itemId) {
+            R.id.menuHome -> {
+            }
+            R.id.menuCategory -> {
+//                type 1
+            }
+            R.id.menuMostSell -> {
+//               type 2
+                bundle.putString("title", "پر فروش ترین ها")
+            }
+            R.id.menuOffer -> {
+//               type 2
+                bundle.putString("title", "پیشنهاد ویژه دیجیکالا")
+            }
+            R.id.menuMostView -> {
+//              type 2
+                bundle.putString("title", "پر بازدید ترین ها")
+            }
+            R.id.menuNews -> {
+//              type 2
+                bundle.putString("title", "جدید ترین ها")
+            }
+            else -> return false
+        }
+        val intent = Intent(this, IndexActivity::class.java)
+        intent.putExtras(bundle)
+        indexActivity_drawerLayout.closeDrawer(GravityCompat.END)
+        startActivity(intent)
+        return true
     }
 }
