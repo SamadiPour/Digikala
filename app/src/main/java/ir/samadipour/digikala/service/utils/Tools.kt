@@ -6,6 +6,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.text.format.DateUtils
 import android.util.DisplayMetrics
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -16,6 +17,26 @@ import kotlinx.android.synthetic.main.toolbar_actionbar.view.*
 import java.text.NumberFormat
 import java.util.*
 
+
+object DateTimeTools {
+    fun getNextDay(): Calendar {
+        return Calendar.getInstance(TimeZone.getDefault()).apply {
+            add(Calendar.DAY_OF_MONTH, 1)
+            set(
+                get(Calendar.YEAR),
+                get(Calendar.MONTH),
+                get(Calendar.DATE),
+                0,
+                0,
+                0
+            )
+        }
+    }
+
+    fun getTimeDifference(firstDate: Calendar, secondDate: Calendar): String {
+        return DateUtils.formatElapsedTime(((secondDate.time.time - firstDate.time.time) / 1000))
+    }
+}
 
 object InternetTools {
     //todo: need some test - http://..., https://..., ://..., wrong url, //..., /...

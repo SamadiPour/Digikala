@@ -70,18 +70,17 @@
                         android:paddingStart="15dp">
 
                         <TextView
-                            android:id="@+id/hourCounterTextView"
+                            android:id="@+id/hourCounter_textView"
                             android:layout_width="35dp"
                             android:layout_height="35dp"
                             android:layout_gravity="center"
                             android:background="@drawable/background_timer"
                             android:gravity="center"
-                            android:text="12"
+                            android:text="@string/doubleZero"
                             android:textColor="@color/white"
                             android:textSize="23sp" />
 
                         <TextView
-                            android:id="@+id/firstDot"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -94,18 +93,17 @@
                             android:textStyle="bold" />
 
                         <TextView
-                            android:id="@+id/minuteCounterTextView"
+                            android:id="@+id/minuteCounter_textView"
                             android:layout_width="35dp"
                             android:layout_height="35dp"
                             android:layout_gravity="center"
                             android:background="@drawable/background_timer"
                             android:gravity="center"
-                            android:text="34"
+                            android:text="@string/doubleZero"
                             android:textColor="@color/white"
                             android:textSize="23sp"/>
 
                         <TextView
-                            android:id="@+id/secondDot"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -118,18 +116,15 @@
                             android:textStyle="bold" />
 
                         <TextView
-                            android:id="@+id/secondCounterTextView"
+                            android:id="@+id/secondCounter_textView"
                             android:layout_width="35dp"
                             android:layout_height="35dp"
                             android:layout_gravity="center"
                             android:background="@drawable/background_timer"
                             android:gravity="center"
-                            android:text="56"
+                            android:text="@string/doubleZero"
                             android:textColor="@color/white"
-                            android:textSize="23sp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintLeft_toRightOf="@id/secondDot"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            android:textSize="23sp" />
 
 
                     </androidx.appcompat.widget.LinearLayoutCompat>

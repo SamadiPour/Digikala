@@ -86,7 +86,7 @@ fun View.switchVisibility() {
         View.GONE
 }
 
-fun TextView.strickThrout() {
+fun TextView.strikeThrough() {
     paintFlags = paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
 }
 

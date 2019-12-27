@@ -2,6 +2,7 @@ package ir.samadipour.digikala.view.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -13,6 +14,7 @@ import com.google.android.material.navigation.NavigationView
 import ir.samadipour.digikala.R
 import ir.samadipour.digikala.service.models.MidScreenBannerModel
 import ir.samadipour.digikala.service.utils.BannerClickListener
+import ir.samadipour.digikala.service.utils.DateTimeTools
 import ir.samadipour.digikala.service.utils.DisplayTools
 import ir.samadipour.digikala.service.utils.InjectUtils
 import ir.samadipour.digikala.view.adapter.CategoryChipsAdapter
@@ -22,11 +24,13 @@ import ir.samadipour.digikala.view.adapter.SpecialOfferAdapter
 import ir.samadipour.digikala.viewmodel.CategoryViewModel
 import ir.samadipour.digikala.viewmodel.IndexActivityViewModel
 import kotlinx.android.synthetic.main.activity_index.*
-import kotlinx.android.synthetic.main.list_item_card_image_large.view.*
+import kotlinx.android.synthetic.main.item_list_simple_image.view.*
 import kotlinx.android.synthetic.main.list_item_card_image_small.view.*
 import kotlinx.android.synthetic.main.row_product_list.view.*
 import kotlinx.android.synthetic.main.toolbar_actionbar.*
 import kotlinx.android.synthetic.main.toolbar_actionbar.view.*
+import java.util.*
+import java.util.concurrent.TimeUnit
 import kotlin.math.floor
 
 
@@ -55,6 +59,8 @@ class IndexActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
             showSearch = true,
             showBasket = true
         )
+
+        handleCountDownTimer()
 
         toolbar.menuButton.setOnClickListener {
             indexActivity_drawerLayout.openDrawer(indexActivity_navigationView)
@@ -161,6 +167,37 @@ class IndexActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
         }
     }
 
+    private fun handleCountDownTimer() {
+        val current = Calendar.getInstance(TimeZone.getDefault())
+        val nextDate = DateTimeTools.getNextDay()
+        object : CountDownTimer(nextDate.timeInMillis - current.timeInMillis, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                var hours = TimeUnit.MILLISECONDS.toHours(millisUntilFinished)
+                //if 24:00:00 occurs?
+                if (hours > 24) {
+                    hours %= 24
+                }
+                hourCounter_textView.text = String.format("%02d", hours)
+                minuteCounter_textView.text = String.format(
+                    "%02d",
+                    TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished) - TimeUnit.HOURS.toMinutes(
+                        TimeUnit.MILLISECONDS.toHours(millisUntilFinished)
+                    )
+                )
+                secondCounter_textView.text = String.format(
+                    "%02d",
+                    TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) - TimeUnit.MINUTES.toSeconds(
+                        TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished)
+                    )
+                )
+            }
+
+            override fun onFinish() {
+
+            }
+        }.start()
+    }
+
     private fun bindBanners(it: MidScreenBannerModel) {
         for (i in 0..3) {
             if (i % 2 == 0) {
@@ -187,7 +224,7 @@ class IndexActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-//        val activity: Any = IndexActivity::class.java
+        val destination: Class<*> = IndexActivity::class.java
         val bundle = Bundle()
         when (item.itemId) {
             R.id.menuHome -> {
@@ -213,10 +250,10 @@ class IndexActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
             }
             else -> return false
         }
-        val intent = Intent(this, IndexActivity::class.java)
+        val intent = Intent(this, destination)
         intent.putExtras(bundle)
         indexActivity_drawerLayout.closeDrawer(GravityCompat.END)
         startActivity(intent)
-        return true
+        return false
     }
 }

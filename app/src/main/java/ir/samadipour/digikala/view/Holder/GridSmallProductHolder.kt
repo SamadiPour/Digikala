@@ -7,7 +7,7 @@ import ir.samadipour.digikala.R
 import ir.samadipour.digikala.service.models.sub_models.IncredibleOffer
 import ir.samadipour.digikala.service.models.sub_models.Product
 import ir.samadipour.digikala.service.utils.DisplayTools
-import ir.samadipour.digikala.service.utils.strickThrout
+import ir.samadipour.digikala.service.utils.strikeThrough
 import kotlinx.android.synthetic.main.item_list_product_small_grid.view.*
 
 
@@ -32,7 +32,7 @@ class GridSmallProductHolder(view: View) : RecyclerView.ViewHolder(view), View.O
                 R.string.price_text,
                 DisplayTools.priceFormatter(incredibleOffer.price)
             )
-            topPrice.strickThrout()
+            topPrice.strikeThrough()
             lowPrice.text = context.resources.getString(
                 R.string.price_text,
                 DisplayTools.priceFormatter(incredibleOffer.price - incredibleOffer.discount)
@@ -56,7 +56,7 @@ class GridSmallProductHolder(view: View) : RecyclerView.ViewHolder(view), View.O
                 R.string.price_text,
                 DisplayTools.priceFormatter(product.minPriceList)
             )
-            topPrice.strickThrout()
+            topPrice.strikeThrough()
             lowPrice.text = context.resources.getString(
                 R.string.price_text,
                 DisplayTools.priceFormatter(product.minPrice)
