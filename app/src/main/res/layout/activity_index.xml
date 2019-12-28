@@ -33,12 +33,12 @@
                     app:sliderCircularHandlerEnabled="true"
                     app:sliderIndicatorAnimationDuration="600"
                     app:sliderIndicatorGravity="center_horizontal|bottom"
-                    app:sliderIndicatorMargin="15dp"
+                    app:sliderIndicatorMargin="5dp"
                     app:sliderIndicatorOrientation="horizontal"
-                    app:sliderIndicatorPadding="3dp"
-                    app:sliderIndicatorRadius="1.5dp"
-                    app:sliderIndicatorSelectedColor="#FFF"
-                    app:sliderIndicatorUnselectedColor="#5A5A5A"
+                    app:sliderIndicatorPadding="2dp"
+                    app:sliderIndicatorRadius="1dp"
+                    app:sliderIndicatorSelectedColor="@color/white"
+                    app:sliderIndicatorUnselectedColor="@color/divider_grey"
                     app:sliderScrollTimeInSec="1" />
 
                 <androidx.legacy.widget.Space
@@ -49,6 +49,7 @@
                     android:id="@+id/chipsView_productCategories"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:paddingStart="5dp"
                     android:layoutDirection="rtl"
                     android:orientation="horizontal"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
@@ -63,7 +64,7 @@
                     android:orientation="horizontal">
 
                     <androidx.appcompat.widget.LinearLayoutCompat
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_weight="1"
@@ -71,19 +72,21 @@
 
                         <TextView
                             android:id="@+id/hourCounter_textView"
-                            android:layout_width="35dp"
-                            android:layout_height="35dp"
-                            android:layout_gravity="center"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
                             android:background="@drawable/background_timer"
+                            android:fontFamily="@font/vazirbold"
                             android:gravity="center"
                             android:text="@string/doubleZero"
                             android:textColor="@color/white"
-                            android:textSize="23sp" />
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
+                            android:fontFamily="@font/vazirbold"
                             android:gravity="center"
                             android:paddingLeft="3dp"
                             android:paddingRight="3dp"
@@ -94,19 +97,21 @@
 
                         <TextView
                             android:id="@+id/minuteCounter_textView"
-                            android:layout_width="35dp"
-                            android:layout_height="35dp"
-                            android:layout_gravity="center"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
                             android:background="@drawable/background_timer"
+                            android:fontFamily="@font/vazirbold"
                             android:gravity="center"
                             android:text="@string/doubleZero"
                             android:textColor="@color/white"
-                            android:textSize="23sp"/>
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
+                            android:fontFamily="@font/vazirbold"
                             android:gravity="center"
                             android:paddingLeft="3dp"
                             android:paddingRight="3dp"
@@ -117,14 +122,15 @@
 
                         <TextView
                             android:id="@+id/secondCounter_textView"
-                            android:layout_width="35dp"
-                            android:layout_height="35dp"
-                            android:layout_gravity="center"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
                             android:background="@drawable/background_timer"
+                            android:fontFamily="@font/vazirbold"
                             android:gravity="center"
                             android:text="@string/doubleZero"
                             android:textColor="@color/white"
-                            android:textSize="23sp" />
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
 
 
                     </androidx.appcompat.widget.LinearLayoutCompat>
@@ -174,7 +180,7 @@
 
                 <androidx.legacy.widget.Space
                     android:layout_width="wrap_content"
-                    android:layout_height="20dp" />
+                    android:layout_height="10dp" />
 
                 <com.facebook.drawee.view.SimpleDraweeView
                     android:id="@+id/secondFullScreenBanner"

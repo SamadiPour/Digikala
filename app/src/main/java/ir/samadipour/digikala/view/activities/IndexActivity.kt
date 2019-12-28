@@ -100,7 +100,9 @@ class IndexActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
         //mid screen banner
         inflater = LayoutInflater.from(this)
         indexViewModel.getMidScreenBanner().observe(this, Observer {
-            bindBanners(it)
+            if (it != null) {
+                bindBanners(it)
+            }
         })
 
         //incredible offers
@@ -157,12 +159,14 @@ class IndexActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
         val topProductOfCats = indexViewModel.getTopListOfCategory(11, 18, 6226, 5966)
         for (index in topProductOfCats.indices) {
             topProductOfCats[index].observe(this, Observer {
-                val adapter = ProductListAdapter(isGone = true, showDiscounted = false)
-                viewsIdes[index].apply {
-                    productListRow_productRecyclerView.adapter = adapter
-                    productListRow_titleTextView.text = categoryNames[index]
+                if (it != null) {
+                    val adapter = ProductListAdapter(isGone = true, showDiscounted = false)
+                    viewsIdes[index].apply {
+                        productListRow_productRecyclerView.adapter = adapter
+                        productListRow_titleTextView.text = categoryNames[index]
+                    }
+                    adapter.submit(it.responses[0].hits.hits)
                 }
-                adapter.submit(it.responses[0].hits.hits)
             })
         }
     }

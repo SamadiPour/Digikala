@@ -27,8 +27,8 @@
                 android:focusable="true"
                 android:gravity="end"
                 android:padding="3dp"
-                android:text="لیست کامل"
-                android:textColor="#1818FF"
+                android:text="@string/full_list_text"
+                android:textColor="@color/text_link_color_blue"
                 android:textSize="12sp"
                 android:visibility="invisible" />
 
@@ -40,10 +40,12 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_weight="1"
+            android:fontFamily="@font/vazirbold"
             android:gravity="start"
             android:lines="1"
             android:paddingEnd="10dp"
             android:textSize="15sp"
+            android:textColor="@color/title_text_color"
             android:textStyle="bold"
             tools:text="جدید ترین محصولات" />
     </androidx.appcompat.widget.LinearLayoutCompat>

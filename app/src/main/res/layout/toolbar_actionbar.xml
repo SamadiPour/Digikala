@@ -9,7 +9,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?android:attr/actionBarSize"
-        android:background="@color/digikalaRed"
+        android:background="@color/dg_red"
         app:contentInsetEnd="0dp"
         app:contentInsetLeft="0dp"
         app:contentInsetRight="0dp"
@@ -18,7 +18,7 @@
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="?android:attr/actionBarSize"
-            android:background="@color/digikalaRed"
+            android:background="@color/dg_red"
             android:orientation="horizontal">
 
             <androidx.appcompat.widget.LinearLayoutCompat

@@ -23,6 +23,7 @@
         <item name="android:fontFamily">@font/vazirmedium</item>
         <item name="android:textStyle">normal</item>
         <item name="android:scaleType">center</item>
+        <item name="android:textColor">@color/title_text_color</item>
 
         <item name="android:listPreferredItemHeightSmall">20dp</item>
         <item name="listPreferredItemHeightSmall">40dp</item>
