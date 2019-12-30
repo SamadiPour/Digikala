@@ -1,6 +1,8 @@
 package ir.samadipour.digikala.view.activities
 
 import android.os.Bundle
+import android.os.Handler
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.google.android.material.tabs.TabLayoutMediator
@@ -43,6 +45,9 @@ class CategoryActivity : AppCompatActivity() {
             tab.text = categoriesModel.data[position].category.title
         }.attach()
 
-        println("sadas")
+        categoryActivity_tabLayout.getTabAt(1)?.select()
+        Handler().postDelayed({
+            categoryActivity_tabLayout.getTabAt(0)?.select()
+        }, 20)
     }
 }
