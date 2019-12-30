@@ -1,4 +1,4 @@
-package ir.samadipour.digikala.view.Holder
+package ir.samadipour.digikala.view.holder
 
 import android.content.Context
 import android.view.View

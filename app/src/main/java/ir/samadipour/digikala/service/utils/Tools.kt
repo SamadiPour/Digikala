@@ -2,6 +2,8 @@ package ir.samadipour.digikala.service.utils
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
+import android.animation.ObjectAnimator
+import android.animation.StateListAnimator
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -11,6 +13,7 @@ import android.util.DisplayMetrics
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat.startActivity
+import com.google.android.material.appbar.AppBarLayout
 import ir.samadipour.digikala.R
 import kotlinx.android.synthetic.main.toolbar_actionbar.*
 import kotlinx.android.synthetic.main.toolbar_actionbar.view.*
@@ -114,17 +117,32 @@ object DisplayTools {
         showBasket: Boolean = false,
         showSearch: Boolean = false,
         showTitle: Boolean = false,
+        title: String = "",
         showDigikala: Boolean = false,
         showBack: Boolean = false,
-        showMenu: Boolean = false
+        showMenu: Boolean = false,
+        hasElevation: Boolean = true
     ) {
         activity.toolbar.let {
             it.apply {
+                if (!hasElevation) {
+                    val stateListAnimator = StateListAnimator()
+                    stateListAnimator.addState(IntArray(0), ObjectAnimator.ofFloat(0f))
+                    (parent as AppBarLayout).stateListAnimator = stateListAnimator
+                }
                 if (showDigikala) digikalaImage.switchVisibility()
                 if (showBasket) basketButton.switchVisibility()
                 if (showSearch) searchButton.switchVisibility()
-                if (showTitle) titleTextView.switchVisibility()
-                if (showBack) backButton.switchVisibility()
+                if (showTitle) {
+                    titleTextView.switchVisibility()
+                    titleTextView.text = title
+                }
+                if (showBack) {
+                    backButton.switchVisibility()
+                    backButton.setOnClickListener {
+                        activity.onBackPressed()
+                    }
+                }
                 if (showMenu) menuButton.switchVisibility()
             }
         }

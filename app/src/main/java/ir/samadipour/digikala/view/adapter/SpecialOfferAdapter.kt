@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.RecyclerView
 import ir.samadipour.digikala.R
 import ir.samadipour.digikala.service.models.sub_models.IncredibleOffer
 import ir.samadipour.digikala.service.utils.inflate
-import ir.samadipour.digikala.view.Holder.GridSmallProductHolder
+import ir.samadipour.digikala.view.holder.GridSmallProductHolder
 
 
 class SpecialOfferAdapter : RecyclerView.Adapter<GridSmallProductHolder>() {

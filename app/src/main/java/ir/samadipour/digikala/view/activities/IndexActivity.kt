@@ -228,30 +228,29 @@ class IndexActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        val destination: Class<*> = IndexActivity::class.java
+        var destination: Class<*>? = null
         val bundle = Bundle()
         when (item.itemId) {
-            R.id.menuHome -> {
-            }
             R.id.menuCategory -> {
 //                type 1
+                destination = CategoryActivity::class.java
             }
-            R.id.menuMostSell -> {
-//               type 2
-                bundle.putString("title", "پر فروش ترین ها")
-            }
-            R.id.menuOffer -> {
-//               type 2
-                bundle.putString("title", "پیشنهاد ویژه دیجیکالا")
-            }
-            R.id.menuMostView -> {
-//              type 2
-                bundle.putString("title", "پر بازدید ترین ها")
-            }
-            R.id.menuNews -> {
-//              type 2
-                bundle.putString("title", "جدید ترین ها")
-            }
+//            R.id.menuMostSell -> {
+////               type 2
+//                bundle.putString("title", "پر فروش ترین ها")
+//            }
+//            R.id.menuOffer -> {
+////               type 2
+//                bundle.putString("title", "پیشنهاد ویژه دیجیکالا")
+//            }
+//            R.id.menuMostView -> {
+////              type 2
+//                bundle.putString("title", "پر بازدید ترین ها")
+//            }
+//            R.id.menuNews -> {
+////              type 2
+//                bundle.putString("title", "جدید ترین ها")
+//            }
             else -> return false
         }
         val intent = Intent(this, destination)

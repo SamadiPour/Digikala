@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.RecyclerView
 import ir.samadipour.digikala.R
 import ir.samadipour.digikala.service.models.dummy_models.Hit
 import ir.samadipour.digikala.service.utils.inflate
-import ir.samadipour.digikala.view.Holder.GridSmallProductHolder
+import ir.samadipour.digikala.view.holder.GridSmallProductHolder
 
 
 class ProductListAdapter(private val isGone: Boolean, private val showDiscounted: Boolean = false) :
