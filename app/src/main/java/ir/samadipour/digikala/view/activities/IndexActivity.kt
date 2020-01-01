@@ -12,6 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.navigation.NavigationView
 import ir.samadipour.digikala.R
+import ir.samadipour.digikala.inteface.enum.ProductListSortTypeEnum
 import ir.samadipour.digikala.service.models.MidScreenBannerModel
 import ir.samadipour.digikala.service.utils.BannerClickListener
 import ir.samadipour.digikala.service.utils.DateTimeTools
@@ -120,7 +121,7 @@ class IndexActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
             productListRow_titleTextView.text = getString(R.string.top_sale_title_text_view)
             productListRow_moreButton.visibility = View.VISIBLE
             productListRow_moreButton.setOnClickListener {
-
+                handleNavigation(R.id.menu_topSellProduct)
             }
         }
 
@@ -131,7 +132,7 @@ class IndexActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
             productListRow_titleTextView.text = getString(R.string.newest_product_title_text_view)
             productListRow_moreButton.visibility = View.VISIBLE
             productListRow_moreButton.setOnClickListener {
-
+                handleNavigation(R.id.menu_newestProducts)
             }
         }
 
@@ -227,29 +228,30 @@ class IndexActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
         }
     }
 
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        var destination: Class<*>? = null
+    override fun onNavigationItemSelected(item: MenuItem): Boolean = handleNavigation(item.itemId)
+
+    private fun handleNavigation(itemId: Int): Boolean {
+        val destination: Class<*>?
         val bundle = Bundle()
-        when (item.itemId) {
+        when (itemId) {
             R.id.menuCategory -> {
-//                type 1
                 destination = CategoryActivity::class.java
             }
-//            R.id.menuMostSell -> {
-////               type 2
-//                bundle.putString("title", "پر فروش ترین ها")
-//            }
-//            R.id.menuOffer -> {
-////               type 2
-//                bundle.putString("title", "پیشنهاد ویژه دیجیکالا")
-//            }
-//            R.id.menuMostView -> {
-////              type 2
-//                bundle.putString("title", "پر بازدید ترین ها")
-//            }
-//            R.id.menuNews -> {
-////              type 2
-//                bundle.putString("title", "جدید ترین ها")
+            R.id.menu_topSellProduct -> {
+                destination = ProductsListActivity::class.java
+                bundle.putParcelable("type", ProductListSortTypeEnum.TOP_SALE)
+            }
+            R.id.menu_mostViewedProduct -> {
+                destination = ProductsListActivity::class.java
+                bundle.putParcelable("type", ProductListSortTypeEnum.MOST_VIEWED)
+            }
+            R.id.menu_newestProducts -> {
+                destination = ProductsListActivity::class.java
+                bundle.putParcelable("type", ProductListSortTypeEnum.NEWEST)
+            }
+//            R.id.menu_incredibleOffer -> {
+//                destination = ProductsListActivity::class.java
+//                bundle.putParcelable("type", ProductListTypeEnum.INCREDIBLE_OFFER)
 //            }
             else -> return false
         }

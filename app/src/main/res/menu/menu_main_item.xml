@@ -25,19 +25,19 @@
         android:id="@+id/group3"
         android:checkableBehavior="single">
         <item
-            android:id="@+id/menuMostSell"
+            android:id="@+id/menu_topSellProduct"
             android:icon="@drawable/ic_star"
             android:title="پر فروش ترین ها" />
         <item
-            android:id="@+id/menuOffer"
+            android:id="@+id/menu_incredibleOffer"
             android:icon="@drawable/ic_star"
             android:title="پیشنهاد ویژه دیجیکالا" />
         <item
-            android:id="@+id/menuMostView"
+            android:id="@+id/menu_mostViewedProduct"
             android:icon="@drawable/ic_star"
             android:title="پر بازدید ترین ها" />
         <item
-            android:id="@+id/menuNews"
+            android:id="@+id/menu_newestProducts"
             android:icon="@drawable/ic_star"
             android:title="جدید ترین ها" />
     </group>

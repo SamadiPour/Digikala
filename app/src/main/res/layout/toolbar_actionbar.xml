@@ -70,8 +70,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:paddingTop="5dp"
-                    android:paddingBottom="5dp"
+                    android:layout_marginTop="13dp"
+                    android:layout_marginBottom="13dp"
                     android:src="@drawable/ic_digikala_logo"
                     android:tint="@color/white"
                     android:visibility="gone" />
@@ -84,7 +84,7 @@
                     android:layout_gravity="center"
                     android:visibility="gone"
                     android:textColor="#fff"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:textStyle="bold" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
@@ -120,10 +120,10 @@
                 <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="20dp"
                     android:layout_height="20dp"
+                    android:paddingTop="4dp"
                     android:src="@drawable/ic_back"
                     android:tint="@color/white" />
             </androidx.appcompat.widget.LinearLayoutCompat>
-
         </androidx.appcompat.widget.LinearLayoutCompat>
     </androidx.appcompat.widget.Toolbar>
 </com.google.android.material.appbar.AppBarLayout>

@@ -61,16 +61,16 @@ object InternetTools {
 }
 
 object DisplayTools {
-    fun getGridItemHeightSize(parent: Activity, divideBy: Int): Int {
+    fun getGridItemHeightSize(parent: Activity, divideBy: Float): Int {
         val displayMetrics = DisplayMetrics()
         parent.windowManager.defaultDisplay.getMetrics(displayMetrics)
-        return displayMetrics.heightPixels / divideBy
+        return (displayMetrics.heightPixels / divideBy).toInt()
     }
 
-    fun getGridItemWidthSize(parent: Activity, divideBy: Int): Int {
+    fun getGridItemWidthSize(parent: Activity, divideBy: Float): Int {
         val displayMetrics = DisplayMetrics()
         parent.windowManager.defaultDisplay.getMetrics(displayMetrics)
-        return displayMetrics.widthPixels / divideBy
+        return (displayMetrics.widthPixels / divideBy).toInt()
     }
 
     fun priceFormatter(price: Int, isRial: Boolean = true): String {
@@ -121,11 +121,11 @@ object DisplayTools {
         showDigikala: Boolean = false,
         showBack: Boolean = false,
         showMenu: Boolean = false,
-        hasElevation: Boolean = true
+        noElevation: Boolean = false
     ) {
         activity.toolbar.let {
             it.apply {
-                if (!hasElevation) {
+                if (noElevation) {
                     val stateListAnimator = StateListAnimator()
                     stateListAnimator.addState(IntArray(0), ObjectAnimator.ofFloat(0f))
                     (parent as AppBarLayout).stateListAnimator = stateListAnimator
