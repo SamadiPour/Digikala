@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">@color/dg_red</color>
     <color name="colorAccent">#FFFFFF</color>
     <color name="dg_red">#EF384E</color>
+    <color name="dg_red_opacity_90">#E6EF384E</color>
     <color name="white">#FFFFFF</color>
     <color name="chips_green">#66BB6A</color>
     <color name="text_green">#3ACE4F</color>

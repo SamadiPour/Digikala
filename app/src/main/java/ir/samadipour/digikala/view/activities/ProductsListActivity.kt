@@ -5,13 +5,13 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.LinearSmoothScroller
 import ir.samadipour.digikala.R
 import ir.samadipour.digikala.inteface.enum.ProductListArrangeEnum
 import ir.samadipour.digikala.inteface.enum.ProductListSortTypeEnum
 import ir.samadipour.digikala.service.utils.DisplayTools
 import ir.samadipour.digikala.service.utils.InjectUtils
-import ir.samadipour.digikala.service.utils.switchVisibility
+import ir.samadipour.digikala.service.utils.OnVerticalScrollListener
 import ir.samadipour.digikala.view.adapter.ProductListAdapter
 import ir.samadipour.digikala.viewmodel.ProductListActivityViewModel
 import kotlinx.android.synthetic.main.activity_products_list.*
@@ -48,7 +48,6 @@ class ProductsListActivity : AppCompatActivity() {
             productList_arrangeImage.setImageResource(arrangeEnum.getDrawable())
             productList_productRecyclerView.layoutManager = arrangeEnum.getLayoutManager(this)
             adapter.changeArrangeTo(arrangeEnum)
-//            todo: check notifyDataChange?
         }
 
         //sort options
@@ -62,24 +61,37 @@ class ProductsListActivity : AppCompatActivity() {
         //get from api based on type
         productListActivityViewModel.getInfiniteProductSortBasedInitial(type)
         productListActivityViewModel.data.observe(this, Observer {
-            if (it != null){
+            if (it != null) {
                 adapter.submit(it)
                 productList_loadingProgressBar.visibility = View.INVISIBLE
             }
         })
 
-        //endless scroll
-        productList_productRecyclerView.addOnScrollListener(object :
-            RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-
-                //we reached at the end!
-                if (!recyclerView.canScrollVertically(1) && dy != 0) {
-                    productList_loadingProgressBar.visibility = View.VISIBLE
-                    productListActivityViewModel.getInfiniteProductSortBased(type)
-                }
+        //go to top button
+        productList_goToTop.setOnClickListener {
+            val smoothScroller = object : LinearSmoothScroller(this) {
+                override fun getVerticalSnapPreference(): Int = SNAP_TO_START
             }
-        })
+            smoothScroller.targetPosition = 0
+            productList_productRecyclerView.layoutManager?.startSmoothScroll(smoothScroller)
+            productList_goToTop.hide()
+        }
+
+        //endless scroll
+        productList_productRecyclerView.addOnScrollListener(OnVerticalScrollListener(
+            reachedBottom = {
+                productList_loadingProgressBar.visibility = View.VISIBLE
+                productListActivityViewModel.getInfiniteProductSortBased(type)
+            },
+            scrollingUp = {
+                productList_goToTop.show()
+            },
+            scrollingDown = {
+                productList_goToTop.hide()
+            },
+            reachedTop = {
+                productList_goToTop.hide()
+            }
+        ))
     }
 }
