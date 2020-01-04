@@ -2,12 +2,17 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/productSmallGrid_cardView"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginBottom="4dp"
+    android:layout_marginEnd="5dp"
+    android:layout_marginStart="5dp"
     android:background="@color/white"
     android:layoutDirection="rtl"
-    app:cardCornerRadius="2dp">
+    app:cardCornerRadius="2dp"
+    app:cardElevation="1dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,13 +20,13 @@
         android:orientation="vertical">
 
         <com.facebook.drawee.view.SimpleDraweeView
-            android:layout_gravity="center"
             android:id="@+id/productSmallGrid_imageView"
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:padding="8dp"
+            android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="15dp"
+            android:padding="8dp"
             app:placeholderImage="@drawable/alt_500px"
             app:placeholderImageScaleType="centerInside"
             app:viewAspectRatio="1" />
@@ -62,9 +67,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:textSize="13sp"
             android:layout_marginEnd="5dp"
             android:textColor="@color/text_green"
+            android:textSize="13sp"
             android:textStyle="normal"
             tools:text="1000000 تومان" />
 

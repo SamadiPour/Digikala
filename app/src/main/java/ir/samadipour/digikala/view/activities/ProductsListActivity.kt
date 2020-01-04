@@ -1,14 +1,17 @@
 package ir.samadipour.digikala.view.activities
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.RecyclerView
 import ir.samadipour.digikala.R
 import ir.samadipour.digikala.inteface.enum.ProductListArrangeEnum
 import ir.samadipour.digikala.inteface.enum.ProductListSortTypeEnum
 import ir.samadipour.digikala.service.utils.DisplayTools
 import ir.samadipour.digikala.service.utils.InjectUtils
+import ir.samadipour.digikala.service.utils.switchVisibility
 import ir.samadipour.digikala.view.adapter.ProductListAdapter
 import ir.samadipour.digikala.viewmodel.ProductListActivityViewModel
 import kotlinx.android.synthetic.main.activity_products_list.*
@@ -57,10 +60,26 @@ class ProductsListActivity : AppCompatActivity() {
             ProductListArrangeEnum.values()[arrange].getLayoutManager(this)
 
         //get from api based on type
-        productListActivityViewModel.getProductSortBased(type)
+        productListActivityViewModel.getInfiniteProductSortBasedInitial(type)
         productListActivityViewModel.data.observe(this, Observer {
-            if (it != null)
-                adapter.submit(it.hits.hits)
+            if (it != null){
+                adapter.submit(it)
+                productList_loadingProgressBar.visibility = View.INVISIBLE
+            }
+        })
+
+        //endless scroll
+        productList_productRecyclerView.addOnScrollListener(object :
+            RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+
+                //we reached at the end!
+                if (!recyclerView.canScrollVertically(1) && dy != 0) {
+                    productList_loadingProgressBar.visibility = View.VISIBLE
+                    productListActivityViewModel.getInfiniteProductSortBased(type)
+                }
+            }
         })
     }
 }

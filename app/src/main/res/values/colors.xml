@@ -15,4 +15,5 @@
     <color name="title_text_color">#647781</color>
     <color name="content_text_color">#14181A</color>
     <color name="default_text_color">#D9D9D9</color>
+    <color name="activity_background">#EEEEEE</color>
 </resources>

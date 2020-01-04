@@ -13,6 +13,7 @@ import ir.samadipour.digikala.view.holder.GridSmallProductHolder
 import ir.samadipour.digikala.view.holder.LinearBigProductHolder
 import ir.samadipour.digikala.view.holder.LinearSmallProductHolder
 import kotlinx.android.parcel.Parcelize
+import kotlinx.android.synthetic.main.item_list_product_small_grid.view.*
 
 @Parcelize
 enum class ProductListArrangeEnum : Parcelable {
@@ -48,11 +49,13 @@ enum class ProductListArrangeEnum : Parcelable {
         dualFull: Boolean = false
     ): RecyclerView.ViewHolder = when (viewType) {
         1 -> {
-            if (dualFull)
+            if (dualFull){
                 view.layoutParams.width = DisplayTools.getGridItemWidthSize(
                     view.context as Activity,
                     2.1f
                 )
+                view.productSmallGrid_cardView.cardElevation = 5f
+            }
             GridSmallProductHolder(view)
         }
         2 -> LinearSmallProductHolder(view)

@@ -22,6 +22,7 @@
         app:tabTextColor="@color/default_text_color" />
 
     <androidx.viewpager2.widget.ViewPager2
+        android:background="@color/activity_background"
         android:id="@+id/categoryActivity_viewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
