@@ -33,8 +33,8 @@ enum class ProductListArrangeEnum : Parcelable {
 
     fun getDrawable() = when (this) {
         TWO_CARD_GRID -> R.drawable.ic_arrange_small_grid
-        SMALL_LINEAR_CARD -> R.drawable.ic_arrange_small_linear
-        BIG_LINEAR_CARD -> R.drawable.ic_arrange_big_linear
+        SMALL_LINEAR_CARD -> R.drawable.ic_arrange_big_linear
+        BIG_LINEAR_CARD -> R.drawable.ic_arrange_small_linear
     }
 
     fun enumToViewType() = when (this) {
@@ -49,7 +49,7 @@ enum class ProductListArrangeEnum : Parcelable {
         dualFull: Boolean = false
     ): RecyclerView.ViewHolder = when (viewType) {
         1 -> {
-            if (dualFull){
+            if (dualFull) {
                 view.layoutParams.width = DisplayTools.getGridItemWidthSize(
                     view.context as Activity,
                     2.1f

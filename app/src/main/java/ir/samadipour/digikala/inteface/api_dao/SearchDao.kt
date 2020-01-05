@@ -9,6 +9,7 @@ interface SearchDao {
     suspend fun getProductSortBased(
         @Query("pageSize") pageSize: Int = 10,
         @Query("pageno") pageno: Int = 0,
-        @Query("sortBy") sortBy: Int? = null
+        @Query("sortBy") sortBy: Int? = null,
+        @Query("sortCondition") sortCondition: Int? = null
     ): Response<ir.samadipour.digikala.service.models.dummy_models.Response>
 }

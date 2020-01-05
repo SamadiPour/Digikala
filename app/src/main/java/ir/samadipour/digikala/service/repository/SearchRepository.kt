@@ -7,15 +7,17 @@ class SearchRepository(private val searchDao: SearchDao) {
     var page: Int = 0
 
     suspend fun getProductSortBased(
-        apiFilterNumber: Int,
+        sortBy: Int? = null,
+        sortCondition: Int? = null,
         reset: Boolean = false
     ): Response? {
         if (reset) page = 0
         try {
             val result = searchDao.getProductSortBased(
-                sortBy = apiFilterNumber,
                 pageSize = 10,
-                pageno = page
+                pageno = page,
+                sortBy = sortBy,
+                sortCondition = sortCondition
             )
             return if (result.isSuccessful && result.body() != null) {
                 page++

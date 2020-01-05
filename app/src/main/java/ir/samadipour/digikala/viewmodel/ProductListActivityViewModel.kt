@@ -17,19 +17,23 @@ class ProductListActivityViewModel(
     private val coroutineContext = Dispatchers.IO + job
     val data = MutableLiveData<List<Hit>>()
 
-    fun getInfiniteProductSortBasedInitial(sort: ProductListSortTypeEnum) {
+    fun getInfiniteProductSortBasedInitial(sortType: ProductListSortTypeEnum) {
         viewModelScope.launch(coroutineContext) {
             val response = searchRepository.getProductSortBased(
-                sort.getApiFilterNumber(),
+                sortBy = sortType.getApiSortNumber(),
+                sortCondition = sortType.getApiSortConditionNumber(),
                 reset = true
             )
             data.postValue(response?.hits?.hits)
         }
     }
 
-    fun getInfiniteProductSortBased(sort: ProductListSortTypeEnum) {
+    fun getInfiniteProductSortBased(sortType: ProductListSortTypeEnum) {
         viewModelScope.launch(coroutineContext) {
-            val response = searchRepository.getProductSortBased(sort.getApiFilterNumber())
+            val response = searchRepository.getProductSortBased(
+                sortBy = sortType.getApiSortNumber(),
+                sortCondition = sortType.getApiSortConditionNumber()
+            )
             if (response?.hits?.hits != null)
                 data.postValue(data.value!! + response.hits.hits)
         }

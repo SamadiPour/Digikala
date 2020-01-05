@@ -3,7 +3,7 @@ package ir.samadipour.digikala.service.utils
 import androidx.recyclerview.widget.RecyclerView
 import ir.samadipour.digikala.inteface.enum.ScrollPosition
 
-class OnVerticalScrollListener(
+class RecyclerViewOnVerticalScrollListener(
     private val reachedTop: (() -> Unit)? = null,
     private val reachedBottom: (() -> Unit)? = null,
     private val scrollingUp: (() -> Unit)? = null,
@@ -34,8 +34,6 @@ class OnVerticalScrollListener(
             else
                 position = ScrollPosition.MIDDLE_TO_BOTTOM
         }
-
-        println(position)
     }
 
 //    RecyclerView.SCROLL_STATE_DRAGGING //finger down
@@ -43,7 +41,6 @@ class OnVerticalScrollListener(
     //RecyclerView.SCROLL_STATE_SETTLING //finger up
     override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
         super.onScrollStateChanged(recyclerView, newState)
-        println(newState)
 
         if (!immediate && newState == RecyclerView.SCROLL_STATE_SETTLING) {
             when (position) {
