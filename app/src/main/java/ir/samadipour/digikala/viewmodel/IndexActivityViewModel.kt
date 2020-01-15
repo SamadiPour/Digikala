@@ -10,14 +10,14 @@ import ir.samadipour.digikala.service.models.MainBannerModel
 import ir.samadipour.digikala.service.models.MidScreenBannerModel
 import ir.samadipour.digikala.service.models.ProductListModel
 import ir.samadipour.digikala.service.repository.AdvertisementBannerRepository
-import ir.samadipour.digikala.service.repository.ProductRepository
+import ir.samadipour.digikala.service.repository.IncredibleProductRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 
 class IndexActivityViewModel(
     private val bannerRepository: AdvertisementBannerRepository,
-    private val productRepository: ProductRepository
+    private val productRepository: IncredibleProductRepository
 ) : ViewModel() {
     private val job = SupervisorJob()
     private val coroutineContext = Dispatchers.IO + job

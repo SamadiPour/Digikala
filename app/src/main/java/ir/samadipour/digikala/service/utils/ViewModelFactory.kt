@@ -4,18 +4,18 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import ir.samadipour.digikala.service.repository.AdvertisementBannerRepository
 import ir.samadipour.digikala.service.repository.CategoryRepository
-import ir.samadipour.digikala.service.repository.ProductRepository
+import ir.samadipour.digikala.service.repository.IncredibleProductRepository
 import ir.samadipour.digikala.service.repository.SearchRepository
 
 class IndexViewModelFactory(
     private val advertisementBannerRepository: AdvertisementBannerRepository,
-    private val productRepository: ProductRepository
+    private val productRepository: IncredibleProductRepository
 ) : ViewModelProvider.NewInstanceFactory() {
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(ViewModel: Class<T>): T {
         return ViewModel.getConstructor(
             AdvertisementBannerRepository::class.java,
-            ProductRepository::class.java
+            IncredibleProductRepository::class.java
         ).newInstance(advertisementBannerRepository, productRepository)
     }
 }

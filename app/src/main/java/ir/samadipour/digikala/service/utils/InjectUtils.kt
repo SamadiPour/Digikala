@@ -2,12 +2,12 @@ package ir.samadipour.digikala.service.utils
 
 import ir.samadipour.digikala.inteface.api_dao.AdvertisementBannerDao
 import ir.samadipour.digikala.inteface.api_dao.CategoryDao
-import ir.samadipour.digikala.inteface.api_dao.ProductDao
+import ir.samadipour.digikala.inteface.api_dao.IncredibleProductDao
 import ir.samadipour.digikala.inteface.api_dao.SearchDao
 import ir.samadipour.digikala.service.config.RetrofitConfig
 import ir.samadipour.digikala.service.repository.AdvertisementBannerRepository
 import ir.samadipour.digikala.service.repository.CategoryRepository
-import ir.samadipour.digikala.service.repository.ProductRepository
+import ir.samadipour.digikala.service.repository.IncredibleProductRepository
 import ir.samadipour.digikala.service.repository.SearchRepository
 import retrofit2.Retrofit
 
@@ -17,10 +17,10 @@ object InjectUtils {
 
     fun getIndexActivityViewModelInstance(): IndexViewModelFactory {
         val advertisementBannerDao = retrofit.create(AdvertisementBannerDao::class.java)
-        val productDao = retrofit.create(ProductDao::class.java)
+        val productDao = retrofit.create(IncredibleProductDao::class.java)
 
         val advertisementBannerRepository = AdvertisementBannerRepository(advertisementBannerDao)
-        val productRepository = ProductRepository(productDao)
+        val productRepository = IncredibleProductRepository(productDao)
 
         return IndexViewModelFactory(advertisementBannerRepository, productRepository)
     }

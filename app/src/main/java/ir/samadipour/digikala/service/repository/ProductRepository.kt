@@ -1,14 +1,13 @@
 package ir.samadipour.digikala.service.repository
 
 import ir.samadipour.digikala.inteface.api_dao.ProductDao
-import ir.samadipour.digikala.service.models.IncredibleOfferModel
-import ir.samadipour.digikala.service.models.ProductListModel
+import ir.samadipour.digikala.service.models.*
 
 class ProductRepository(private val productDao: ProductDao) {
 
-    suspend fun getIncredibleOffers(): IncredibleOfferModel? {
+    suspend fun getProductById(id: Int): ProductModel? {
         try {
-            val result = productDao.getIncredibleOffers()
+            val result = productDao.getProductById(id = id)
             return if (result.isSuccessful && result.body() != null) {
                 result.body()
             } else null
@@ -18,9 +17,9 @@ class ProductRepository(private val productDao: ProductDao) {
         return null
     }
 
-    suspend fun getGeneralProducts(): ProductListModel? {
+    suspend fun getUserRateInfoByProductId(id: Int): ProductRateModel? {
         try {
-            val result = productDao.getGeneralProducts()
+            val result = productDao.getUserRateInfoByProductId(id = id)
             return if (result.isSuccessful && result.body() != null) {
                 result.body()
             } else null
@@ -30,9 +29,21 @@ class ProductRepository(private val productDao: ProductDao) {
         return null
     }
 
-    suspend fun getTopListOfCategory(category: String): ProductListModel? {
+    suspend fun getAlbumByProductId(id: Int): ProductAlbumModel? {
         try {
-            val result = productDao.getGeneralProducts(category = category)
+            val result = productDao.getAlbumByProductId(id = id)
+            return if (result.isSuccessful && result.body() != null) {
+                result.body()
+            } else null
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return null
+    }
+
+    suspend fun getProductDefaultConfigById(id: Int): ProductConfigModel? {
+        try {
+            val result = productDao.getProductDefaultConfigById(id = id)
             return if (result.isSuccessful && result.body() != null) {
                 result.body()
             } else null
