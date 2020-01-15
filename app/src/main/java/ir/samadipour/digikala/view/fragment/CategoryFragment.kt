@@ -19,7 +19,8 @@ class CategoryFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val adapter = SubCategoryAdapter(arguments!!.getParcelableArrayList<SubCategory>("cat") as List<SubCategory>)
+        val adapter =
+            SubCategoryAdapter(arguments!!.getParcelableArrayList<SubCategory>("cat") as List<SubCategory>)
         categoryFragment_subCategories.adapter = adapter
     }
 }

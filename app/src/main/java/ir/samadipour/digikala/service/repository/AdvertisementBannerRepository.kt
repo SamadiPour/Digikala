@@ -4,7 +4,6 @@ import ir.samadipour.digikala.inteface.api_dao.AdvertisementBannerDao
 import ir.samadipour.digikala.inteface.enum.BannerTypeEnum
 import ir.samadipour.digikala.service.models.MainBannerModel
 import ir.samadipour.digikala.service.models.MidScreenBannerModel
-import java.lang.Exception
 
 
 class AdvertisementBannerRepository(private val bannerDao: AdvertisementBannerDao) {

@@ -1,6 +1,6 @@
 package ir.samadipour.digikala.service.models
+
 import com.google.gson.annotations.SerializedName
-import ir.samadipour.digikala.service.models.sub_models.ImagePaths
 import ir.samadipour.digikala.service.models.sub_models.IncredibleOffer
 
 

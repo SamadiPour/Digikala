@@ -1,6 +1,5 @@
 package ir.samadipour.digikala.inteface.api_dao
 
-import com.facebook.common.internal.ImmutableMap
 import ir.samadipour.digikala.service.config.RetrofitConfig
 import ir.samadipour.digikala.service.models.MainBannerModel
 import ir.samadipour.digikala.service.models.MidScreenBannerModel

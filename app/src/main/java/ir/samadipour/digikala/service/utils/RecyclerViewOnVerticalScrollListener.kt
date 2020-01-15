@@ -36,7 +36,7 @@ class RecyclerViewOnVerticalScrollListener(
         }
     }
 
-//    RecyclerView.SCROLL_STATE_DRAGGING //finger down
+    //    RecyclerView.SCROLL_STATE_DRAGGING //finger down
     //RecyclerView.SCROLL_STATE_IDLE //not moving anymore
     //RecyclerView.SCROLL_STATE_SETTLING //finger up
     override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {

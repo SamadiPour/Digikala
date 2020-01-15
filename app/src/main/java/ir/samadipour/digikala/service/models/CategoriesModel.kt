@@ -1,4 +1,5 @@
 package ir.samadipour.digikala.service.models
+
 import com.google.gson.annotations.SerializedName
 import ir.samadipour.digikala.service.models.sub_models.Category
 import ir.samadipour.digikala.service.models.sub_models.SubCategory

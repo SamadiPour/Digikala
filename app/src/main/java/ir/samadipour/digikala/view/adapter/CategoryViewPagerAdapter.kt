@@ -8,7 +8,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import ir.samadipour.digikala.service.models.CategoriesData
 import ir.samadipour.digikala.view.fragment.CategoryFragment
-import java.util.ArrayList
+import java.util.*
 
 class CategoryViewPagerAdapter(
     fragment: FragmentManager,
