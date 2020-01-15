@@ -2,10 +2,7 @@ package ir.samadipour.digikala.view.activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.CountDownTimer
-import android.view.LayoutInflater
-import android.view.MenuItem
-import android.view.View
+import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.lifecycle.Observer
@@ -13,9 +10,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.navigation.NavigationView
 import ir.samadipour.digikala.R
 import ir.samadipour.digikala.inteface.enum.ProductListSortTypeEnum
+import ir.samadipour.digikala.service.ClickListener.BannerClickListener
 import ir.samadipour.digikala.service.models.MidScreenBannerModel
-import ir.samadipour.digikala.service.utils.BannerClickListener
-import ir.samadipour.digikala.service.utils.DateTimeTools
 import ir.samadipour.digikala.service.utils.DisplayTools
 import ir.samadipour.digikala.service.utils.InjectUtils
 import ir.samadipour.digikala.view.adapter.CategoryChipsAdapter
@@ -30,8 +26,6 @@ import kotlinx.android.synthetic.main.list_item_card_image_small.view.*
 import kotlinx.android.synthetic.main.row_product_list.view.*
 import kotlinx.android.synthetic.main.toolbar_actionbar.*
 import kotlinx.android.synthetic.main.toolbar_actionbar.view.*
-import java.util.*
-import java.util.concurrent.TimeUnit
 import kotlin.math.floor
 
 
@@ -40,6 +34,8 @@ class IndexActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        requestWindowFeature(Window.FEATURE_NO_TITLE)
+        window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
         setContentView(R.layout.activity_index)
 
         val indexViewModel = ViewModelProvider(
@@ -61,7 +57,11 @@ class IndexActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
             showBasket = true
         )
 
-        handleCountDownTimer()
+        DisplayTools.handleCountDownTimer(
+            hourCounter_indexTextView,
+            minuteCounter_indexTextView,
+            secondCounter_indexTextView
+        )
 
         toolbar.menuButton.setOnClickListener {
             indexActivity_drawerLayout.openDrawer(indexActivity_navigationView)
@@ -69,11 +69,11 @@ class IndexActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
         indexActivity_navigationView.setNavigationItemSelectedListener(this)
 
         //banner slider
-        val imageSliderAdapter = ImageSliderAdapter()
+        val imageSliderAdapter = ImageSliderAdapter(fullScreen = true)
         imageSlider_banners.sliderAdapter = imageSliderAdapter
-        indexViewModel.getSliderBanner().observe(this, Observer {
-            if (it != null)
-                imageSliderAdapter.submit(it.data)
+        indexViewModel.getSliderBanner().observe(this, Observer { bannerModel ->
+            if (bannerModel != null)
+                imageSliderAdapter.submit(bannerModel.data.map { it.bannerPathMobile })
         })
 
         //category chips
@@ -88,13 +88,18 @@ class IndexActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
         indexViewModel.getFullScreenBanners().observe(this, Observer {
             if (it != null) {
                 firstFullScreenBanner.setImageURI(it.data[0].bannerPathMobile)
-                firstFullScreenBanner.setOnClickListener { view ->
-                    BannerClickListener.onBanner(it.data[0], view)
-                }
+                firstFullScreenBanner.setOnClickListener(
+                    BannerClickListener(
+                        it.data[0]
+                    )
+                )
+
                 secondFullScreenBanner.setImageURI(it.data[1].bannerPathMobile)
-                secondFullScreenBanner.setOnClickListener { view ->
-                    BannerClickListener.onBanner(it.data[1], view)
-                }
+                secondFullScreenBanner.setOnClickListener(
+                    BannerClickListener(
+                        it.data[1]
+                    )
+                )
             }
         })
 
@@ -170,37 +175,6 @@ class IndexActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
                 }
             })
         }
-    }
-
-    private fun handleCountDownTimer() {
-        val current = Calendar.getInstance(TimeZone.getDefault())
-        val nextDate = DateTimeTools.getNextDay()
-        object : CountDownTimer(nextDate.timeInMillis - current.timeInMillis, 1000) {
-            override fun onTick(millisUntilFinished: Long) {
-                var hours = TimeUnit.MILLISECONDS.toHours(millisUntilFinished)
-                //if 24:00:00 occurs?
-                if (hours > 24) {
-                    hours %= 24
-                }
-                hourCounter_textView.text = String.format("%02d", hours)
-                minuteCounter_textView.text = String.format(
-                    "%02d",
-                    TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished) - TimeUnit.HOURS.toMinutes(
-                        TimeUnit.MILLISECONDS.toHours(millisUntilFinished)
-                    )
-                )
-                secondCounter_textView.text = String.format(
-                    "%02d",
-                    TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) - TimeUnit.MINUTES.toSeconds(
-                        TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished)
-                    )
-                )
-            }
-
-            override fun onFinish() {
-
-            }
-        }.start()
     }
 
     private fun bindBanners(it: MidScreenBannerModel) {

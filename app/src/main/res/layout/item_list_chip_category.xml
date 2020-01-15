@@ -23,7 +23,7 @@
         android:paddingLeft="10dp"
         android:paddingTop="6dp"
         android:paddingRight="10dp"
-        android:paddingBottom="6dp"
+        android:paddingBottom="8dp"
         android:textColor="@color/white"
         android:textSize="13sp"
         android:textStyle="bold"

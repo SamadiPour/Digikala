@@ -5,13 +5,13 @@
     android:id="@+id/productSmallGrid_cardView"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginTop="4dp"
-    android:layout_marginBottom="4dp"
-    android:layout_marginEnd="5dp"
     android:layout_marginStart="5dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginEnd="5dp"
+    android:layout_marginBottom="4dp"
     android:background="@color/white"
     android:layoutDirection="rtl"
-    app:cardCornerRadius="2dp"
+    app:cardCornerRadius="3dp"
     app:cardElevation="1dp">
 
     <LinearLayout
@@ -21,12 +21,13 @@
 
         <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/productSmallGrid_imageView"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="155dp"
+            android:layout_height="130dp"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="15dp"
-            android:padding="8dp"
+            android:padding="4dp"
+            app:actualImageScaleType="centerInside"
             app:placeholderImage="@drawable/alt_500px"
             app:placeholderImageScaleType="centerInside"
             app:viewAspectRatio="1" />

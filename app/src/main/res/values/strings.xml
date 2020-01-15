@@ -8,8 +8,10 @@
     <string name="doubleZero">00</string>
     <string name="full_list_text">لیست کامل</string>
     <string name="filter_text_view">فیلتر کردن</string>
-    <string name="filter_types_text_view">رنگ، نوع، قیمت و ...</string>
+    <string name="filter_types_text_view">رنگ، نوع، قیمت و …</string>
     <string name="sort_text_view">مرتب کردن</string>
     <string name="sort_type_text_view">پر فروش ترین</string>
     <string name="special_offer_red_box_text">پیشنهاد ویژه</string>
+    <string name="users_comments">نظرات کاربران</string>
+    <string name="product_description">مشخصات</string>
 </resources>

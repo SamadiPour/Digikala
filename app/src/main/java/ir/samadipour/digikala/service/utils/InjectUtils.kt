@@ -1,14 +1,8 @@
 package ir.samadipour.digikala.service.utils
 
-import ir.samadipour.digikala.inteface.api_dao.AdvertisementBannerDao
-import ir.samadipour.digikala.inteface.api_dao.CategoryDao
-import ir.samadipour.digikala.inteface.api_dao.IncredibleProductDao
-import ir.samadipour.digikala.inteface.api_dao.SearchDao
+import ir.samadipour.digikala.inteface.api_dao.*
 import ir.samadipour.digikala.service.config.RetrofitConfig
-import ir.samadipour.digikala.service.repository.AdvertisementBannerRepository
-import ir.samadipour.digikala.service.repository.CategoryRepository
-import ir.samadipour.digikala.service.repository.IncredibleProductRepository
-import ir.samadipour.digikala.service.repository.SearchRepository
+import ir.samadipour.digikala.service.repository.*
 import retrofit2.Retrofit
 
 object InjectUtils {
@@ -35,5 +29,11 @@ object InjectUtils {
         val dao = retrofit.create(SearchDao::class.java)
         val repository = SearchRepository(dao)
         return ProductListViewModelFactory(repository)
+    }
+
+    fun getProductDetailViewModelInstance(): ProductDetailViewModelFactory {
+        val dao = retrofit.create(ProductDao::class.java)
+        val repository = ProductRepository(dao)
+        return ProductDetailViewModelFactory(repository)
     }
 }

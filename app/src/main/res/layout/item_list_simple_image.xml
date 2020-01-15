@@ -4,6 +4,5 @@
     android:id="@+id/itemList_imageView_large"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    app:actualImageScaleType="centerCrop"
     app:placeholderImage="@drawable/alt_500px"
     app:placeholderImageScaleType="center" />

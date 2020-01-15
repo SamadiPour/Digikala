@@ -8,9 +8,11 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.os.CountDownTimer
 import android.text.format.DateUtils
 import android.util.DisplayMetrics
 import android.view.View
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat.startActivity
 import com.google.android.material.appbar.AppBarLayout
@@ -19,6 +21,7 @@ import kotlinx.android.synthetic.main.toolbar_actionbar.*
 import kotlinx.android.synthetic.main.toolbar_actionbar.view.*
 import java.text.NumberFormat
 import java.util.*
+import java.util.concurrent.TimeUnit
 
 
 object DateTimeTools {
@@ -61,6 +64,41 @@ object InternetTools {
 }
 
 object DisplayTools {
+    fun handleCountDownTimer(
+        hourView: TextView,
+        minuteView: TextView,
+        secondView: TextView
+    ) {
+        val current = Calendar.getInstance(TimeZone.getDefault())
+        val nextDate = DateTimeTools.getNextDay()
+        object : CountDownTimer(nextDate.timeInMillis - current.timeInMillis, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                var hours = TimeUnit.MILLISECONDS.toHours(millisUntilFinished)
+                //if 24:00:00 occurs?
+                if (hours > 24) {
+                    hours %= 24
+                }
+                hourView.text = String.format("%02d", hours)
+                minuteView.text = String.format(
+                    "%02d",
+                    TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished) - TimeUnit.HOURS.toMinutes(
+                        TimeUnit.MILLISECONDS.toHours(millisUntilFinished)
+                    )
+                )
+                secondView.text = String.format(
+                    "%02d",
+                    TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) - TimeUnit.MINUTES.toSeconds(
+                        TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished)
+                    )
+                )
+            }
+
+            override fun onFinish() {
+
+            }
+        }.start()
+    }
+
     fun getGridItemHeightSize(parent: Activity, divideBy: Float): Int {
         val displayMetrics = DisplayMetrics()
         parent.windowManager.defaultDisplay.getMetrics(displayMetrics)
