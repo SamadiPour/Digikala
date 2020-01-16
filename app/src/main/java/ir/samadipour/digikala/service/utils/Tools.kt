@@ -111,6 +111,7 @@ object DisplayTools {
         return (displayMetrics.widthPixels / divideBy).toInt()
     }
 
+    @JvmStatic
     fun priceFormatter(price: Int, isRial: Boolean = true): String {
         return NumberFormat.getNumberInstance(Locale("fa"))
             .format(if (isRial) price / 10 else price)

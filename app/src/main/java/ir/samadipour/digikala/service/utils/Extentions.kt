@@ -3,12 +3,17 @@ package ir.samadipour.digikala.service.utils
 import android.app.Activity
 import android.content.Context
 import android.graphics.Paint
+import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.Drawable
+import android.graphics.drawable.GradientDrawable
+import android.graphics.drawable.ShapeDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.ColorInt
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -98,6 +103,10 @@ fun ViewGroup.inflate(@LayoutRes layoutRes: Int): View {
     return LayoutInflater.from(context).inflate(layoutRes, this, false)
 }
 
-fun String.parseTime(): String {
-    return SimpleDateFormat("HH:mm").format(SimpleDateFormat("H:m", Locale.US).parse(this))
+fun Drawable.overrideColor(colorInt: Int) {
+    when (this) {
+        is GradientDrawable -> setColor(colorInt)
+        is ShapeDrawable -> paint.color = colorInt
+        is ColorDrawable -> color = colorInt
+    }
 }

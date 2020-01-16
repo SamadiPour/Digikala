@@ -7,6 +7,8 @@
 
         <import type="android.view.View" />
 
+        <import type="ir.samadipour.digikala.service.utils.DisplayTools" />
+
         <variable
             name="product"
             type="ir.samadipour.digikala.service.models.ProductData" />
@@ -160,7 +162,6 @@
                         android:layout_height="2dp" />
 
                     <TextView
-                        android:id="@+id/productEnTitleTextView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
@@ -285,7 +286,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layoutDirection="rtl"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp">
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="0dp"
@@ -384,6 +387,302 @@
             <!--      3333333333333      -->
             <!--      3333333333333      -->
             <!--      3333333333333      -->
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="10dp"
+                android:backgroundTint="@color/white"
+                android:orientation="vertical"
+                app:cardElevation="3dp">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginEnd="12dp"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layoutDirection="rtl"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/vazirbold"
+                            android:padding="5dp"
+                            android:text="@string/color"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="left"
+                            android:padding="5dp"
+                            android:text="@{String.format(@string/color_count, productConfig.colors.size())}"
+                            android:textColor="#9E9E9E"
+                            android:textSize="14sp"
+                            android:textStyle="normal" />
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/colorRecyclerView_ProductDetail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layoutDirection="rtl"
+                        android:orientation="horizontal"
+                        android:overScrollMode="never"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layoutDirection="rtl"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:layoutDirection="ltr"
+                            android:padding="11dp"
+                            android:src="@drawable/ic_shield"
+                            android:tint="#CDCDCD" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="5dp"
+                            android:text="@{productConfig.configViewModel.warranty.title}"
+                            android:textColor="#979797"
+                            android:textSize="13sp"
+                            android:textStyle="normal"
+                            tools:text="گارانتی" />
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_margin="5dp"
+                        android:background="@color/divider_grey" />
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layoutDirection="rtl"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:layoutDirection="ltr"
+                            android:padding="11dp"
+                            android:src="@{productConfig.configViewModel.seller.id == 1 ? @drawable/ic_dk : @drawable/ic_store}" />
+
+                        <TextView
+                            android:id="@+id/sellerInfoText_productDetail"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="5dp"
+                            android:textColor="#979797"
+                            android:textSize="13sp"
+                            android:textStyle="bold"
+                            tools:text="فروش توسط دیجیکالا" />
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layoutDirection="rtl"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:layoutDirection="rtl"
+                            android:padding="11dp"
+                            android:src="@drawable/ic_truck"
+                            android:tint="#646464" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="5dp"
+                            android:text="آماده ارسال از انبار دیجیکالا"
+                            android:textColor="#979797"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_margin="5dp"
+                        android:background="@color/divider_grey" />
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layoutDirection="ltr"
+                        android:orientation="horizontal"
+                        android:paddingTop="8dp"
+                        android:paddingEnd="5dp"
+                        android:paddingBottom="13dp">
+
+                        <TextView
+                            android:id="@+id/minPrice_ProductDetail"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:textColor="#47BD57"
+                            android:textSize="21sp"
+                            android:textStyle="normal"
+                            tools:text="۲۵۰۰ تومان" />
+
+                        <TextView
+                            android:id="@+id/maxPrice_ProductDetail"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="5dp"
+                            android:textColor="@color/dg_red"
+                            android:textSize="14sp"
+                            android:textStyle="normal"
+                            android:visibility="@{productConfig.configViewModel.discount == 0 ? View.GONE : View.VISIBLE}"
+                            tools:text="۲۵۰۰ تومان" />
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:clickable="true"
+                        android:elevation="0dp"
+                        android:focusable="true"
+                        android:foreground="?android:attr/selectableItemBackgroundBorderless"
+                        app:cardCornerRadius="2dp"
+                        app:cardElevation="0dp">
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/chips_green"
+                            android:gravity="center"
+                            android:layoutDirection="rtl"
+                            android:orientation="horizontal"
+                            android:paddingTop="4dp"
+                            android:paddingBottom="4dp">
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_gravity="center"
+                                android:layoutDirection="ltr"
+                                android:padding="8dp"
+                                android:src="@drawable/ic_cart"
+                                android:tint="@color/white" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginRight="10dp"
+                                android:paddingBottom="3dp"
+                                android:text="@string/add_to_basket"
+                                android:textColor="@color/white"
+                                android:textSize="17sp"
+                                android:textStyle="normal" />
+
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_margin="5dp"
+                        android:background="@color/divider_grey" />
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?android:attr/selectableItemBackgroundBorderless"
+                        android:gravity="center"
+                        android:layoutDirection="rtl"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:layoutDirection="ltr"
+                            android:padding="11dp"
+                            android:src="@drawable/ic_store"
+                            android:tint="#A0A0A0" />
+
+                        <TextView
+                            android:id="@+id/productAllStoreTextView"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:gravity="right"
+                            android:lines="1"
+                            android:paddingStart="3dp"
+                            android:paddingEnd="3dp"
+                            android:text="@{String.format(@string/num_of_sellers, productConfig.configNum)}"
+                            android:textColor="#2196F3"
+                            android:textSize="13sp"
+                            android:textStyle="bold"
+                            tools:text="۶ فروشنده و گارانتی برای این کالا وجود دارد" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?android:attr/selectableItemBackgroundBorderless"
+                            android:layoutDirection="ltr"
+                            android:padding="15dp"
+                            android:src="@drawable/ic_arrow"
+                            android:tint="#878787" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+                </androidx.appcompat.widget.LinearLayoutCompat>
+            </androidx.cardview.widget.CardView>
+
+            <!--      444444444444444      -->
+            <!--      444444444444444      -->
+            <!--      444444444444444      -->
+            <!--      444444444444444      -->
+            <!--      444444444444444      -->
+            <!--      444444444444444      -->
+            <!--      444444444444444      -->
+            <!--      444444444444444      -->
+            <!--      444444444444444      -->
+            <!--      444444444444444      -->
+            <!--      444444444444444      -->
+            <!--      444444444444444      -->
+
+
 
         </androidx.appcompat.widget.LinearLayoutCompat>
     </ScrollView>
