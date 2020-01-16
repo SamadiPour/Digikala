@@ -49,10 +49,12 @@ class ProductDetailActivity : AppCompatActivity(), Observer<Any?>, Toolbar.OnMen
             InjectUtils.getProductDetailViewModelInstance()
         ).get(ProductDetailActivityViewModel::class.java)
 
-        productViewModel.getProductById(productId).observe(this, this)
-        productViewModel.getAlbumByProductId(productId).observe(this, this)
-        productViewModel.getProductDefaultConfigById(productId).observe(this, this)
-        productViewModel.getUserRateInfoByProductId(productId).observe(this, this)
+        if (productId != -1) {
+            productViewModel.getProductById(productId).observe(this, this)
+            productViewModel.getAlbumByProductId(productId).observe(this, this)
+            productViewModel.getProductDefaultConfigById(productId).observe(this, this)
+            productViewModel.getUserRateInfoByProductId(productId).observe(this, this)
+        }
     }
 
     override fun onChanged(data: Any?) {
@@ -86,11 +88,13 @@ class ProductDetailActivity : AppCompatActivity(), Observer<Any?>, Toolbar.OnMen
                 //more button in description
                 binding.continueDescriptionProductDetail.setOnClickListener {
                     if (binding.descriptionProductDetail.maxLines == 8) {
+                        //show full text
                         binding.descriptionProductDetail.maxLines = Int.MAX_VALUE
                         binding.continueDescriptionProductDetail.text = getString(
-                            R.string.continue_description
+                            R.string.close_description
                         )
                     } else {
+                        //show 8 lines of text
                         binding.descriptionProductDetail.maxLines = 8
                         binding.continueDescriptionProductDetail.text = getString(
                             R.string.continue_description

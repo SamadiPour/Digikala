@@ -11,7 +11,8 @@ import ir.samadipour.digikala.service.utils.strikeThrough
 import kotlinx.android.synthetic.main.item_list_product_small_linear.view.*
 
 
-class LinearSmallProductHolder(val view: View) : RecyclerView.ViewHolder(view), View.OnClickListener {
+class LinearSmallProductHolder(val view: View) : RecyclerView.ViewHolder(view),
+    View.OnClickListener {
     private val context: Context = view.context
     private val imageView = view.productSmallLinear_ImageView
     private val persianTitle = view.productSmallLinear_persianTitleTextView
@@ -25,7 +26,7 @@ class LinearSmallProductHolder(val view: View) : RecyclerView.ViewHolder(view), 
     }
 
     fun bind(product: Product) {
-        view.id = product.id
+        view.tag = product.id
         imageView.setImageURI(product.imagePath)
         persianTitle.text = product.faTitle
         englishTitle.text = product.enTitle

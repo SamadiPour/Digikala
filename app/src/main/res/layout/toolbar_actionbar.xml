@@ -18,9 +18,9 @@
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
-            android:layoutDirection="ltr"
             android:layout_height="?android:attr/actionBarSize"
             android:background="@color/dg_red"
+            android:layoutDirection="ltr"
             android:orientation="horizontal">
 
             <androidx.appcompat.widget.LinearLayoutCompat

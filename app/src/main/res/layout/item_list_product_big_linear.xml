@@ -8,10 +8,10 @@
     android:layout_marginLeft="5dp"
     android:layout_marginTop="10dp"
     android:layout_marginRight="5dp"
+    android:background="@color/white"
     android:clickable="true"
     android:focusable="true"
     android:foreground="?android:attr/selectableItemBackgroundBorderless"
-    android:background="@color/white"
     app:cardCornerRadius="3dp">
 
     <LinearLayout

@@ -24,7 +24,7 @@ class GridSmallProductHolder(val view: View) : RecyclerView.ViewHolder(view) {
     }
 
     fun bind(incredibleOffer: IncredibleOffer, isGone: Boolean) {
-        view.id = incredibleOffer.productId
+        view.tag = incredibleOffer.productId
         imageView.setImageURI(incredibleOffer.imagePaths.original)
         title.text = incredibleOffer.title
 
@@ -49,7 +49,7 @@ class GridSmallProductHolder(val view: View) : RecyclerView.ViewHolder(view) {
     }
 
     fun bind(product: Product, isGone: Boolean, showDiscounted: Boolean) {
-        view.id = product.id
+        view.tag = product.id
         imageView.setImageURI(product.imagePath)
         title.text = product.faTitle
 

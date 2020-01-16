@@ -44,8 +44,8 @@
             android:gravity="start"
             android:lines="1"
             android:paddingEnd="10dp"
-            android:textSize="15sp"
             android:textColor="@color/title_text_color"
+            android:textSize="15sp"
             android:textStyle="bold"
             tools:text="جدید ترین محصولات" />
     </androidx.appcompat.widget.LinearLayoutCompat>

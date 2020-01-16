@@ -46,6 +46,9 @@ class ProductsListActivity : AppCompatActivity() {
 
         //arrange options
         productList_arrangeCard.setOnClickListener {
+            //circular index
+            //changing enum, icon, layoutManage
+            //setting it to adapter
             arrange = (arrange + 1) % 3
             val arrangeEnum = ProductListArrangeEnum.values()[arrange]
             productList_arrangeImage.setImageResource(arrangeEnum.getDrawable())
@@ -53,10 +56,7 @@ class ProductsListActivity : AppCompatActivity() {
             adapter.changeArrangeTo(arrangeEnum)
         }
 
-        //sort options
-        productList_sortCard.setOnClickListener {}
-
-        //recycler view
+        //main recycler view containing all products
         productList_productRecyclerView.adapter = adapter
         productList_productRecyclerView.layoutManager =
             ProductListArrangeEnum.values()[arrange].getLayoutManager(this)
@@ -72,6 +72,7 @@ class ProductsListActivity : AppCompatActivity() {
 
         //go to top button
         productList_goToTop.setOnClickListener {
+            //smooth scroller
             val smoothScroller = object : LinearSmoothScroller(this) {
                 override fun getVerticalSnapPreference(): Int = SNAP_TO_START
             }
@@ -83,6 +84,7 @@ class ProductsListActivity : AppCompatActivity() {
         //endless scroll
         productList_productRecyclerView.addOnScrollListener(RecyclerViewOnVerticalScrollListener(
             reachedBottom = {
+                //getting more data
                 productList_loadingProgressBar.visibility = View.VISIBLE
                 productListActivityViewModel.getInfiniteProductSortBased(productSortType)
             },
@@ -110,10 +112,15 @@ class ProductsListActivity : AppCompatActivity() {
                     ),
                     productSortType.getIndex()
                 ) { dialog, which ->
+                    //on item clicked
+                    //hiding dialog
+                    //getting all data from beginning
+                    //scroll to top
                     dialog?.dismiss()
                     productSortType = ProductListSortTypeEnum.values()[which]
                     productList_sortTitle.text = productSortType.toSingleChoiceItemsText()
                     productListActivityViewModel.getInfiniteProductSortBasedInitial(productSortType)
+                    productList_productRecyclerView.scrollToPosition(0)
                 }.show()
         }
     }

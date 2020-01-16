@@ -50,6 +50,8 @@ enum class ProductListArrangeEnum : Parcelable {
     ): RecyclerView.ViewHolder = when (viewType) {
         1 -> {
             if (dualFull) {
+                //scratch view to have 2.1 item in page
+                //0.1 is for padding between them
                 view.layoutParams.width = DisplayTools.getGridItemWidthSize(
                     view.context as Activity,
                     2.1f

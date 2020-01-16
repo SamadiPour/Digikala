@@ -26,13 +26,14 @@ class LinearBigProductHolder(val view: View) : RecyclerView.ViewHolder(view) {
     }
 
     fun bind(product: Product) {
-        view.id = product.id
+        view.tag = product.id
         imageView.setImageURI(product.imagePath)
         persianTitle.text = product.faTitle
         englishTitle.text = product.enTitle
         specialBox.visibility = if (product.isSpecialOffer) View.VISIBLE else View.INVISIBLE
 
         if (product.isSpecialOffer && product.minPriceList > 0) {
+            //when we have discount
             topPrice.visibility = View.VISIBLE
             topPrice.text = context.resources.getString(
                 R.string.price_text,
@@ -44,6 +45,7 @@ class LinearBigProductHolder(val view: View) : RecyclerView.ViewHolder(view) {
                 DisplayTools.priceFormatter(product.minPrice)
             )
         } else {
+            //when there is no discount
             topPrice.visibility = View.INVISIBLE
             lowPrice.text = context.resources.getString(
                 R.string.price_text,

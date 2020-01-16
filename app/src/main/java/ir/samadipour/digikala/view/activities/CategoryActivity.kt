@@ -27,6 +27,7 @@ class CategoryActivity : AppCompatActivity() {
             title = "دسته بندی محصولات"
         )
 
+        //check if data reached
         if (CategoryViewModel.data.value != null)
             setTabsTitle(CategoryViewModel.data.value!!, position)
         else {
@@ -40,15 +41,22 @@ class CategoryActivity : AppCompatActivity() {
         categoriesModel: CategoriesModel,
         position: Int
     ) {
-        categoryActivity_viewPager.adapter =
-            CategoryViewPagerAdapter(supportFragmentManager, lifecycle, categoriesModel.data)
+        //creating categories tabs
+        //every page is a fragment
+        categoryActivity_viewPager.adapter = CategoryViewPagerAdapter(
+            supportFragmentManager, lifecycle, categoriesModel.data
+        )
+
+        //attaching it to view pager 2
         TabLayoutMediator(categoryActivity_tabLayout, categoryActivity_viewPager) { tab, position ->
             tab.text = categoriesModel.data[position].category.title
         }.attach()
 
         if (position > 0) {
+            //if category was selected by chip
             categoryActivity_tabLayout.getTabAt(position)?.select()
         } else {
+            //fixing rtl problem
             categoryActivity_tabLayout.getTabAt(1)?.select()
             Handler().postDelayed({
                 categoryActivity_tabLayout.getTabAt(0)?.select()

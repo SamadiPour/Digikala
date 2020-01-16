@@ -19,6 +19,7 @@ class CategoryViewPagerAdapter(
     override fun getItemCount(): Int = data.size
 
     override fun createFragment(position: Int): Fragment {
+        //sending subcategories to fragment
         val fragment = CategoryFragment()
         fragment.arguments = Bundle().apply {
             putParcelableArrayList("cat", data[position].subCategory as ArrayList<out Parcelable>)

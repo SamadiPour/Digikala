@@ -1,7 +1,5 @@
 package ir.samadipour.digikala.service.utils
 
-import android.animation.Animator
-import android.animation.AnimatorListenerAdapter
 import android.animation.ObjectAnimator
 import android.animation.StateListAnimator
 import android.app.Activity
@@ -9,9 +7,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.CountDownTimer
-import android.text.format.DateUtils
 import android.util.DisplayMetrics
-import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat.startActivity
@@ -37,10 +33,6 @@ object DateTimeTools {
                 0
             )
         }
-    }
-
-    fun getTimeDifference(firstDate: Calendar, secondDate: Calendar): String {
-        return DateUtils.formatElapsedTime(((secondDate.time.time - firstDate.time.time) / 1000))
     }
 }
 
@@ -99,56 +91,15 @@ object DisplayTools {
         }.start()
     }
 
-    fun getGridItemHeightSize(parent: Activity, divideBy: Float): Int {
-        val displayMetrics = DisplayMetrics()
-        parent.windowManager.defaultDisplay.getMetrics(displayMetrics)
-        return (displayMetrics.heightPixels / divideBy).toInt()
-    }
-
     fun getGridItemWidthSize(parent: Activity, divideBy: Float): Int {
         val displayMetrics = DisplayMetrics()
         parent.windowManager.defaultDisplay.getMetrics(displayMetrics)
         return (displayMetrics.widthPixels / divideBy).toInt()
     }
 
-    @JvmStatic
     fun priceFormatter(price: Int, isRial: Boolean = true): String {
         return NumberFormat.getNumberInstance(Locale("fa"))
             .format(if (isRial) price / 10 else price)
-    }
-
-    fun switchVisibility(
-        first: View,
-        second: View,
-        isAnimated: Boolean = false,
-        duration: Long = 300
-    ) {
-        val firstTemp = first.visibility
-        val secondTemp = second.visibility
-
-        if (isAnimated) {
-            first.animate()
-                .setDuration(duration)
-                .alpha(if (secondTemp == View.VISIBLE) 1.0f else 0.0f)
-                .setListener(object : AnimatorListenerAdapter() {
-                    override fun onAnimationEnd(animation: Animator?) {
-                        super.onAnimationEnd(animation)
-                        first.visibility = secondTemp
-                    }
-                })
-            second.animate()
-                .setDuration(duration)
-                .alpha(if (firstTemp == View.VISIBLE) 1.0f else 0.0f)
-                .setListener(object : AnimatorListenerAdapter() {
-                    override fun onAnimationEnd(animation: Animator?) {
-                        super.onAnimationEnd(animation)
-                        second.visibility = firstTemp
-                    }
-                })
-        } else {
-            first.visibility = secondTemp
-            second.visibility = firstTemp
-        }
     }
 
     fun toolbar(

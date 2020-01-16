@@ -9,7 +9,7 @@ class ProductClickListener : View.OnClickListener {
     override fun onClick(v: View?) {
         if (v != null) {
             val intent = Intent(v.context, ProductDetailActivity::class.java)
-            val bundle = Bundle().apply { putInt("id", v.id) }
+            val bundle = Bundle().apply { putInt("id", v.tag?.toString()?.toInt() ?: -1) }
             intent.putExtras(bundle)
             v.context.startActivity(intent)
         }

@@ -37,10 +37,6 @@ class ImageSliderAdapter(private var fullScreen: Boolean) :
                 ScalingUtils.ScaleType.CENTER_CROP
             else
                 ScalingUtils.ScaleType.CENTER_INSIDE
-
-            imageView.setOnClickListener {
-
-            }
         }
     }
 }

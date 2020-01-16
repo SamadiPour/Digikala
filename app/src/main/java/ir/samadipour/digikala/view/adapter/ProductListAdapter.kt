@@ -15,8 +15,8 @@ class ProductListAdapter(
     private val showDiscounted: Boolean = false,
     private val dualFull: Boolean = false
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    var data = emptyList<Hit>()
-    var arrange = ProductListArrangeEnum.TWO_CARD_GRID
+    private var data = emptyList<Hit>()
+    private var arrange = ProductListArrangeEnum.TWO_CARD_GRID
 
     fun submit(newData: List<Hit>) {
         data = newData

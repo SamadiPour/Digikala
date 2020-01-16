@@ -140,7 +140,7 @@ class ProductPriceCharActivity : AppCompatActivity(), Observer<Any?> {
             }
             setData(LineData(dataSet))
             invalidate()
-            animateX(1800,Easing.EaseOutBack)
+            animateX(1800, Easing.EaseOutBack)
         }
     }
 }

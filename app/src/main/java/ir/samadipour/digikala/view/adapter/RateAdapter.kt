@@ -33,6 +33,9 @@ class RateAdapter(var data: List<RateFactorInfo>) : RecyclerView.Adapter<RateAda
             rateTitle.text = data.title
             var rate = data.rateAverage
             var index = 0
+
+            //spiting rate to 5 part
+            //filling ProgressBar till rate is less than zero
             while (rate > 0) {
                 if (rate > 20)
                     rateList[index].progress = 20

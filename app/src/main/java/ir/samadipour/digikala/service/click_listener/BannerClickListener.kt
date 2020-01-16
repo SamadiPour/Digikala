@@ -12,7 +12,7 @@ class BannerClickListener(private val bannerModel: Banner) : View.OnClickListene
                     v.context,
                     bannerModel.linkValue
                 )
-                "ProductList" -> println(bannerModel.linkValue)//todo: implement this
+                "ProductList" -> println(bannerModel.linkValue)
             }
     }
 }

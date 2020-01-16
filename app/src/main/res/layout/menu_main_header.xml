@@ -30,9 +30,9 @@
             android:background="@drawable/background_button_login"
             android:clickable="true"
             android:focusable="true"
+            android:fontFamily="@font/vazirmedium"
             android:foreground="?android:attr/selectableItemBackgroundBorderless"
             android:padding="7dp"
-            android:fontFamily="@font/vazirmedium"
             android:text="ورود و ثبت نام"
             android:textColor="@color/white"
             android:textSize="13sp" />

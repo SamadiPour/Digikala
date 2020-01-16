@@ -35,6 +35,8 @@ class CategoryChipsAdapter : RecyclerView.Adapter<CategoryChipsAdapter.ChipViewH
         private var categoryPosition: Int = -1
 
         init {
+            //when clicking on chip
+            //sending position to scroll to that position
             view.setOnClickListener {
                 val intent = Intent(view.context, CategoryActivity::class.java)
                 val bundle = Bundle()

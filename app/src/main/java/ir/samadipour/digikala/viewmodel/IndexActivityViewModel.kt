@@ -32,7 +32,7 @@ class IndexActivityViewModel(
         emit(productRepository.getIncredibleOffers())
     }
 
-    fun getGeneralProducts()= liveData {
+    fun getGeneralProducts() = liveData {
         emit(productRepository.getGeneralProducts())
     }
 
