@@ -33,4 +33,10 @@ interface ProductDao {
         @HeaderMap headerMaps: Map<String, String> = RetrofitConfig.headers,
         @Query("id") id: Int
     ): Response<ProductConfigModel>
+
+    @GET("api/ProductCache/GetPriceChart/{id}")
+    suspend fun getPriceChart(
+        @HeaderMap headerMaps: Map<String, String> = RetrofitConfig.headers,
+        @Path("id") id: Int
+    ): Response<PriceChartModel>
 }

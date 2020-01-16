@@ -5,14 +5,14 @@ import ir.samadipour.digikala.service.models.sub_models.ImagePaths
 
 data class ProductAlbumModel(
     @SerializedName("Data")
-    val `data`: List<Data> = listOf(),
+    val `data`: List<ProductAlbumData> = listOf(),
     @SerializedName("Message")
     val message: Any = Any(), // null
     @SerializedName("Status")
     val status: String = "" // Success
 )
 
-data class Data(
+data class ProductAlbumData(
     @SerializedName("ImagePaths")
     val imagePaths: ImagePaths = ImagePaths(),
     @SerializedName("ProductPhotoId")

@@ -52,4 +52,16 @@ class ProductRepository(private val productDao: ProductDao) {
         }
         return null
     }
+
+    suspend fun getPriceChart(id: Int): PriceChartModel? {
+        try {
+            val result = productDao.getPriceChart(id = id)
+            return if (result.isSuccessful && result.body() != null) {
+                result.body()
+            } else null
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return null
+    }
 }

@@ -71,6 +71,9 @@ dependencies {
     //image silder
     implementation "com.github.smarteist:autoimageslider:$image_slider_version-appcompat"
 
+    //chart
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
     //testing
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'

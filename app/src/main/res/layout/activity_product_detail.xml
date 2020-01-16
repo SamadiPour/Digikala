@@ -88,11 +88,8 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="0.5dp"
+                        android:layout_marginBottom="5dp"
                         android:background="#70CCCCCC" />
-
-                    <Space
-                        android:layout_width="wrap_content"
-                        android:layout_height="5dp" />
 
                     <androidx.appcompat.widget.LinearLayoutCompat
                         android:layout_width="match_parent"
@@ -330,7 +327,6 @@
                             android:textStyle="bold" />
 
                     </androidx.appcompat.widget.LinearLayoutCompat>
-
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
@@ -341,7 +337,7 @@
                     app:cardCornerRadius="2dp"
                     app:cardElevation="2dp">
 
-                    <LinearLayout
+                    <androidx.appcompat.widget.LinearLayoutCompat
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@color/white"
@@ -371,8 +367,7 @@
                             android:textColor="#657881"
                             android:textSize="12sp"
                             android:textStyle="bold" />
-
-                    </LinearLayout>
+                    </androidx.appcompat.widget.LinearLayoutCompat>
                 </androidx.cardview.widget.CardView>
             </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -733,6 +728,78 @@
                 </androidx.appcompat.widget.LinearLayoutCompat>
             </androidx.cardview.widget.CardView>
 
+
+            <!--      555555555555      -->
+            <!--      555555555555      -->
+            <!--      555555555555      -->
+            <!--      555555555555      -->
+            <!--      555555555555      -->
+            <!--      555555555555      -->
+            <!--      555555555555      -->
+            <!--      555555555555      -->
+            <!--      555555555555      -->
+            <!--      555555555555      -->
+            <!--      555555555555      -->
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="15dp"
+                android:background="@color/white"
+                android:layoutDirection="rtl"
+                android:orientation="horizontal"
+                app:cardElevation="2dp">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="10dp"
+                        android:text="@{String.format(@string/product_rate_count, product.rateCounter)}"
+                        android:textColor="#9E9E9E"
+                        android:textSize="10sp"
+                        android:textStyle="normal" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="10dp"
+                        android:text="@{String.format(@string/product_rate, product.rate)}"
+                        android:textColor="#646464"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                    <RatingBar
+                        style="?android:attr/ratingBarStyleIndicator"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="left"
+                        android:layoutDirection="ltr"
+                        android:max="100"
+                        android:numStars="5"
+                        android:scaleX="0.8"
+                        android:scaleY="0.8"
+                        android:stepSize="0.1" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/ratingRecyclerView_productDetail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp" />
+            </androidx.cardview.widget.CardView>
         </androidx.appcompat.widget.LinearLayoutCompat>
     </ScrollView>
 </layout>

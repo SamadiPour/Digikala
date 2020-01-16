@@ -20,6 +20,8 @@
     <string name="num_of_sellers">%1$s فروشنده و گارانتی برای این کالا وجود دارد</string>
     <string name="seller_info">فروش توسط %1$s</string>
     <string name="seller_info_with_detail">فروش توسط %1$s | رضایت خرید: %2$s</string>
+    <string name="product_rate_count">از مجموع %1$s رای ثبت شده</string>
+    <string name="product_rate">%1$d از 5</string>
     <string name="continue_description">ادامه مطلب</string>
     <string name="close_description">بستن</string>
 </resources>

@@ -19,4 +19,9 @@
     <color name="default_text_color">#D9D9D9</color>
     <color name="activity_background">#EEEEEE</color>
     <color name="indicatorUnselected">#48FFFFFF</color>
+    <color name="chart_grid">#78909c</color>
+    <color name="chart_bg_blue">#1a2196f3</color>
+    <color name="chart_bg_green">#1a1ed085</color>
+    <color name="chart_blue">#2196f3</color>
+    <color name="chart_green">#1ed085</color>
 </resources>

@@ -27,4 +27,8 @@ class ProductDetailActivityViewModel(
     fun getUserRateInfoByProductId(id: Int) = liveData {
         emit(repository.getUserRateInfoByProductId(id))
     }
+
+    fun getPriceChart(id: Int) = liveData {
+        emit(repository.getPriceChart(id))
+    }
 }
