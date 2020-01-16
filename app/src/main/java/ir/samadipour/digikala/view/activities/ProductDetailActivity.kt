@@ -1,9 +1,11 @@
 package ir.samadipour.digikala.view.activities
 
+import android.content.Intent
 import android.os.Bundle
-import android.view.Window
-import android.view.WindowManager
+import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -17,25 +19,30 @@ import ir.samadipour.digikala.service.utils.DisplayTools
 import ir.samadipour.digikala.service.utils.InjectUtils
 import ir.samadipour.digikala.service.utils.strikeThrough
 import ir.samadipour.digikala.view.adapter.ImageSliderAdapter
-import ir.samadipour.digikala.view.adapter.ProductDetailColorAdapter
+import ir.samadipour.digikala.view.adapter.ProductDetailColorSizeAdapter
+import ir.samadipour.digikala.view.adapter.RateAdapter
 import ir.samadipour.digikala.viewmodel.ProductDetailActivityViewModel
 import kotlinx.android.synthetic.main.activity_product_detail.*
+import kotlinx.android.synthetic.main.toolbar_actionbar.*
 
-class ProductDetailActivity : AppCompatActivity(), Observer<Any?> {
+class ProductDetailActivity : AppCompatActivity(), Observer<Any?>, Toolbar.OnMenuItemClickListener {
     private lateinit var binding: ActivityProductDetailBinding
+    private var productId: Int = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        requestWindowFeature(Window.FEATURE_NO_TITLE)
-        window.setFlags(
-            WindowManager.LayoutParams.FLAG_FULLSCREEN,
-            WindowManager.LayoutParams.FLAG_FULLSCREEN
-        )
         binding = DataBindingUtil.setContentView(this, R.layout.activity_product_detail)
 
+        DisplayTools.toolbar(
+            this,
+            showBack = true,
+            showBasket = true,
+            showMenu = true
+        )
 
-//        val productId = intent.getIntExtra("id", -1)
-        val productId = 1964396
+        toolbar.setOnMenuItemClickListener(this)
+
+        productId = intent.getIntExtra("id", -1)
 
         val productViewModel = ViewModelProvider(
             this,
@@ -52,6 +59,22 @@ class ProductDetailActivity : AppCompatActivity(), Observer<Any?> {
         when (data) {
             is ProductModel -> {
                 binding.product = data.data
+
+                //changing toolbar
+                DisplayTools.toolbar(
+                    this,
+                    showTitle = true,
+                    title = data.data.faTitle,
+                    titleSize = 14f,
+                    showMenu = true
+                )
+
+                //set average rate
+                binding.ratingProductDetail.text = getString(
+                    R.string.product_rate,
+                    data.data.rate.toFloat() * 5 / 100
+                )
+                binding.ratingBarProductDetail.rating = data.data.rate.toFloat() * 5 / 100
 
                 //special offer timer
                 if (data.data.isSpecialOffer) DisplayTools.handleCountDownTimer(
@@ -76,9 +99,11 @@ class ProductDetailActivity : AppCompatActivity(), Observer<Any?> {
                 }
             }
             is ProductRateModel -> {
-
+                val rateAdapter = RateAdapter(data.data.categoryRateInfos[0].rateFactorInfos)
+                ratingRecyclerView_productDetail.adapter = rateAdapter
             }
             is ProductAlbumModel -> {
+                //slider images
                 val imageSliderAdapter = ImageSliderAdapter(fullScreen = false)
                 imageSlider_productDetail.sliderAdapter = imageSliderAdapter
                 imageSliderAdapter.submit(data.data.map { it.imagePaths.original })
@@ -86,9 +111,35 @@ class ProductDetailActivity : AppCompatActivity(), Observer<Any?> {
             is ProductConfigModel -> {
                 binding.productConfig = data.data
 
-                //create colors list
-                binding.colorRecyclerViewProductDetail.adapter =
-                    ProductDetailColorAdapter(data.data.colors)
+                //create Colors/Size list
+                when {
+                    data.data.sizes != null -> {
+                        if (data.data.sizes.isNotEmpty()) {
+                            binding.colorSizeRecyclerViewProductDetail.adapter =
+                                ProductDetailColorSizeAdapter(data.data.sizes)
+                        }
+                        colorSizeText_ProductDetail.text = getString(R.string.size)
+                        colorSizeCount_ProductDetail.text = getString(
+                            R.string.size_count,
+                            data.data.sizes.size
+                        )
+                    }
+                    data.data.colors != null -> {
+                        if (data.data.colors.isNotEmpty()) {
+                            binding.colorSizeRecyclerViewProductDetail.adapter =
+                                ProductDetailColorSizeAdapter(data.data.colors)
+                        }
+                        colorSizeText_ProductDetail.text = getString(R.string.color)
+                        colorSizeCount_ProductDetail.text = getString(
+                            R.string.color_count,
+                            data.data.colors.size
+                        )
+                    }
+                    else -> {
+                        colorSizeText_ProductDetail.visibility = View.GONE
+                        colorSizeCount_ProductDetail.visibility = View.GONE
+                    }
+                }
 
                 //setting price
                 binding.minPriceProductDetail.text = getString(
@@ -127,4 +178,16 @@ class ProductDetailActivity : AppCompatActivity(), Observer<Any?> {
             }
         }
     }
+
+    override fun onMenuItemClick(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            R.id.menu_priceChart -> {
+                val intent = Intent(this, ProductPriceCharActivity::class.java)
+                intent.putExtras(Bundle().apply { putInt("id", productId) })
+                startActivity(intent)
+            }
+        }
+        return false
+    }
+
 }

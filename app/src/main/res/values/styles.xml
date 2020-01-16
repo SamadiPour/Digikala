@@ -3,6 +3,7 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar.Bridge">
         <!-- Customize your theme here. -->
+        <item name="colorControlNormal">#fff</item>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
@@ -35,17 +36,14 @@
         <item name="listPreferredItemPaddingRight">8dp</item>
     </style>
 
-<!--    <style name="CustomAlertDialog">-->
-<!--        <item name="android:alertDialogTheme">@style/CustomAlertDialogTheme</item>-->
-<!--    </style>-->
 
-<!--    <style name="CustomAlertDialogTheme">-->
-<!--        <item name="android:textColorAlertDialogListItem">@color/chips_green</item>-->
-<!--        <item name="android:textColorSecondary">@color/chips_green</item>-->
-<!--        <item name="android:colorPrimary">@color/chips_green</item>-->
-<!--&lt;!&ndash;        <item name="android:colorSecondary">@color/black</item>&ndash;&gt;-->
-<!--&lt;!&ndash;        <item name="android:drawableTint"></item>&ndash;&gt;-->
-<!--    </style>-->
+    <style name="RatingBar" parent="Theme.AppCompat">
+        <item name="colorControlActivated">@color/dg_red</item>
+        <item name="colorControlNormal">#9097AA</item>
+    </style>
+
+
+
 
 
 </resources>

@@ -35,9 +35,7 @@ class ProductPriceCharActivity : AppCompatActivity(), Observer<Any?> {
             title = "نمودار قیمت"
         )
 
-//        val productId = intent.getIntExtra("id", -1)
-        val productId = 1964396
-
+        val productId = intent.getIntExtra("id", -1)
 
         val viewModel = ViewModelProvider(
             this,

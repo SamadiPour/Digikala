@@ -4,13 +4,14 @@ import android.content.Context
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import ir.samadipour.digikala.R
+import ir.samadipour.digikala.service.click_listener.ProductClickListener
 import ir.samadipour.digikala.service.models.sub_models.Product
 import ir.samadipour.digikala.service.utils.DisplayTools
 import ir.samadipour.digikala.service.utils.strikeThrough
 import kotlinx.android.synthetic.main.item_list_product_big_linear.view.*
 
 
-class LinearBigProductHolder(view: View) : RecyclerView.ViewHolder(view), View.OnClickListener {
+class LinearBigProductHolder(val view: View) : RecyclerView.ViewHolder(view) {
     private val context: Context = view.context
     private val imageView = view.productBigLinear_ImageView
     private val persianTitle = view.productBigLinear_persianTitleTextView
@@ -21,10 +22,11 @@ class LinearBigProductHolder(view: View) : RecyclerView.ViewHolder(view), View.O
     private val colorList = view.productBigLinear_colorLinearLayout //todo: implement
 
     init {
-        view.setOnClickListener(this)
+        view.setOnClickListener(ProductClickListener())
     }
 
     fun bind(product: Product) {
+        view.id = product.id
         imageView.setImageURI(product.imagePath)
         persianTitle.text = product.faTitle
         englishTitle.text = product.enTitle
@@ -48,9 +50,5 @@ class LinearBigProductHolder(view: View) : RecyclerView.ViewHolder(view), View.O
                 DisplayTools.priceFormatter(product.minPrice)
             )
         }
-    }
-
-    override fun onClick(v: View?) {
-
     }
 }

@@ -14,13 +14,20 @@ data class ProductConfigModel(
 
 data class ProductConfigData(
     @SerializedName("Colors")
-    val colors: List<Color> = listOf(),
+    val colors: List<Color>? = listOf(),
     @SerializedName("ConfigNum")
     val configNum: Int = 0, // 3
     @SerializedName("ConfigViewModel")
     val configViewModel: ConfigViewModel = ConfigViewModel(),
     @SerializedName("Sizes")
-    val sizes: Any = Any() // null
+    val sizes: List<SizesModel>? = listOf() // null
+)
+
+data class SizesModel(
+    @SerializedName("Id")
+    val id: Int = 0, // 31983
+    @SerializedName("Title")
+    val title: String = "" // 0.170 گرم
 )
 
 data class ConfigViewModel(

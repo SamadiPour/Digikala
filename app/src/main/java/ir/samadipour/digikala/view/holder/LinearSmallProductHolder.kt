@@ -4,13 +4,14 @@ import android.content.Context
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import ir.samadipour.digikala.R
+import ir.samadipour.digikala.service.click_listener.ProductClickListener
 import ir.samadipour.digikala.service.models.sub_models.Product
 import ir.samadipour.digikala.service.utils.DisplayTools
 import ir.samadipour.digikala.service.utils.strikeThrough
 import kotlinx.android.synthetic.main.item_list_product_small_linear.view.*
 
 
-class LinearSmallProductHolder(view: View) : RecyclerView.ViewHolder(view), View.OnClickListener {
+class LinearSmallProductHolder(val view: View) : RecyclerView.ViewHolder(view), View.OnClickListener {
     private val context: Context = view.context
     private val imageView = view.productSmallLinear_ImageView
     private val persianTitle = view.productSmallLinear_persianTitleTextView
@@ -20,10 +21,11 @@ class LinearSmallProductHolder(view: View) : RecyclerView.ViewHolder(view), View
     private val specialBox = view.productSmallLinear_specialOfferBox
 
     init {
-        view.setOnClickListener(this)
+        view.setOnClickListener(ProductClickListener())
     }
 
     fun bind(product: Product) {
+        view.id = product.id
         imageView.setImageURI(product.imagePath)
         persianTitle.text = product.faTitle
         englishTitle.text = product.enTitle

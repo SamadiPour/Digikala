@@ -1,4 +1,4 @@
-package ir.samadipour.digikala.service.ClickListener
+package ir.samadipour.digikala.service.click_listener
 
 import android.view.View
 import ir.samadipour.digikala.service.models.sub_models.Banner

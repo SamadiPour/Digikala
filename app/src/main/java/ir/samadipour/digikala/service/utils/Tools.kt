@@ -157,13 +157,15 @@ object DisplayTools {
         showSearch: Boolean = false,
         showTitle: Boolean = false,
         title: String = "",
+        titleSize: Float? = null,
         showDigikala: Boolean = false,
         showBack: Boolean = false,
-        showMenu: Boolean = false,
-        noElevation: Boolean = false
+        showHamburger: Boolean = false,
+        noElevation: Boolean = false,
+        showMenu: Boolean = false
     ) {
-        activity.toolbar.let {
-            it.apply {
+        activity.toolbar.let { toolbar ->
+            toolbar.apply {
                 if (noElevation) {
                     val stateListAnimator = StateListAnimator()
                     stateListAnimator.addState(IntArray(0), ObjectAnimator.ofFloat(0f))
@@ -176,13 +178,20 @@ object DisplayTools {
                     titleTextView.switchVisibility()
                     titleTextView.text = title
                 }
+                if (titleSize != null) {
+                    titleTextView.textSize = titleSize
+                }
                 if (showBack) {
                     backButton.switchVisibility()
                     backButton.setOnClickListener {
                         activity.onBackPressed()
                     }
                 }
-                if (showMenu) menuButton.switchVisibility()
+                if (showHamburger) menuButton.switchVisibility()
+                if (!showMenu) {
+                    activity.menuInflater.inflate(R.menu.hamburger_main_item, menu)
+                    menu.clear()
+                }
             }
         }
     }

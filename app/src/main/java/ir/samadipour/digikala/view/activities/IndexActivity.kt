@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.navigation.NavigationView
 import ir.samadipour.digikala.R
 import ir.samadipour.digikala.inteface.enum.ProductListSortTypeEnum
-import ir.samadipour.digikala.service.ClickListener.BannerClickListener
+import ir.samadipour.digikala.service.click_listener.BannerClickListener
 import ir.samadipour.digikala.service.models.MidScreenBannerModel
 import ir.samadipour.digikala.service.utils.DisplayTools
 import ir.samadipour.digikala.service.utils.InjectUtils
@@ -50,7 +50,7 @@ class IndexActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
         DisplayTools.toolbar(
             this,
             showDigikala = true,
-            showMenu = true,
+            showHamburger = true,
             showSearch = true,
             showBasket = true
         )

@@ -22,7 +22,6 @@ class CategoryActivity : AppCompatActivity() {
 
         DisplayTools.toolbar(
             this,
-            noElevation = true,
             showBack = true,
             showTitle = true,
             title = "دسته بندی محصولات"

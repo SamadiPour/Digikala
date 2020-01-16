@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import ir.samadipour.digikala.R
+import ir.samadipour.digikala.service.click_listener.ProductClickListener
 import ir.samadipour.digikala.service.models.sub_models.IncredibleOffer
 import ir.samadipour.digikala.service.models.sub_models.Product
 import ir.samadipour.digikala.service.utils.DisplayTools
@@ -11,7 +12,7 @@ import ir.samadipour.digikala.service.utils.strikeThrough
 import kotlinx.android.synthetic.main.item_list_product_small_grid.view.*
 
 
-class GridSmallProductHolder(view: View) : RecyclerView.ViewHolder(view), View.OnClickListener {
+class GridSmallProductHolder(val view: View) : RecyclerView.ViewHolder(view) {
     private val context: Context = view.context
     private val imageView = view.productSmallGrid_imageView
     private val title = view.productSmallGrid_title
@@ -19,10 +20,11 @@ class GridSmallProductHolder(view: View) : RecyclerView.ViewHolder(view), View.O
     private val lowPrice = view.productSmallGrid_lowPrice
 
     init {
-        view.setOnClickListener(this)
+        view.setOnClickListener(ProductClickListener())
     }
 
     fun bind(incredibleOffer: IncredibleOffer, isGone: Boolean) {
+        view.id = incredibleOffer.productId
         imageView.setImageURI(incredibleOffer.imagePaths.original)
         title.text = incredibleOffer.title
 
@@ -47,6 +49,7 @@ class GridSmallProductHolder(view: View) : RecyclerView.ViewHolder(view), View.O
     }
 
     fun bind(product: Product, isGone: Boolean, showDiscounted: Boolean) {
+        view.id = product.id
         imageView.setImageURI(product.imagePath)
         title.text = product.faTitle
 
@@ -75,9 +78,5 @@ class GridSmallProductHolder(view: View) : RecyclerView.ViewHolder(view), View.O
                 )
             }
         }
-    }
-
-    override fun onClick(v: View?) {
-
     }
 }

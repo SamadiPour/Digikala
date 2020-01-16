@@ -252,7 +252,7 @@
         app:headerLayout="@layout/menu_main_header"
         app:itemHorizontalPadding="20dp"
         app:itemIconPadding="20dp"
-        app:menu="@menu/menu_main_item"
+        app:menu="@menu/hamburger_main_item"
         app:theme="@style/NavigationDrawerStyle" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

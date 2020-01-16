@@ -25,7 +25,6 @@ class ProductListAdapter(
 
     fun changeArrangeTo(arrangeEnum: ProductListArrangeEnum) {
         arrange = arrangeEnum
-//        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
