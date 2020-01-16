@@ -52,11 +52,28 @@ class ProductDetailActivity : AppCompatActivity(), Observer<Any?> {
         when (data) {
             is ProductModel -> {
                 binding.product = data.data
+
+                //special offer timer
                 if (data.data.isSpecialOffer) DisplayTools.handleCountDownTimer(
                     hourCounter_productTextView,
                     minuteCounter_productTextView,
                     secondCounter_productTextView
                 )
+
+                //more button in description
+                binding.continueDescriptionProductDetail.setOnClickListener {
+                    if (binding.descriptionProductDetail.maxLines == 8) {
+                        binding.descriptionProductDetail.maxLines = Int.MAX_VALUE
+                        binding.continueDescriptionProductDetail.text = getString(
+                            R.string.continue_description
+                        )
+                    } else {
+                        binding.descriptionProductDetail.maxLines = 8
+                        binding.continueDescriptionProductDetail.text = getString(
+                            R.string.continue_description
+                        )
+                    }
+                }
             }
             is ProductRateModel -> {
 

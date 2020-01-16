@@ -397,7 +397,7 @@
                 android:layout_marginBottom="10dp"
                 android:backgroundTint="@color/white"
                 android:orientation="vertical"
-                app:cardElevation="3dp">
+                app:cardElevation="2dp">
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
@@ -405,6 +405,7 @@
                     android:layout_marginStart="12dp"
                     android:layout_marginTop="3dp"
                     android:layout_marginEnd="12dp"
+                    android:layout_marginBottom="3dp"
                     android:orientation="vertical">
 
                     <androidx.appcompat.widget.LinearLayoutCompat
@@ -682,7 +683,55 @@
             <!--      444444444444444      -->
             <!--      444444444444444      -->
 
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                app:cardElevation="2dp">
 
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/description_productDetail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:lineSpacingMultiplier="1.2"
+                        android:maxLines="8"
+                        android:padding="10dp"
+                        android:text="@{product.description}"
+                        android:textColor="#3B3B3B"
+                        android:textSize="13sp"
+                        tools:text="توضیحات محصول" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:background="@color/divider_grey" />
+
+                    <TextView
+                        android:id="@+id/continueDescription_productDetail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?android:attr/selectableItemBackgroundBorderless"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="@string/continue_description"
+                        android:textColor="#9E9E9E"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+            </androidx.cardview.widget.CardView>
 
         </androidx.appcompat.widget.LinearLayoutCompat>
     </ScrollView>
