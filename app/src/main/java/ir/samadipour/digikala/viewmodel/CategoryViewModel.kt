@@ -12,6 +12,7 @@ import kotlinx.coroutines.launch
 class CategoryViewModel(private val categoryRepository: CategoryRepository) : ViewModel() {
     private val job = SupervisorJob()
     private val coroutineContext = Dispatchers.IO + job
+    private var trying = false
     private var fetched = false
 
     //to have it all the times
@@ -19,13 +20,19 @@ class CategoryViewModel(private val categoryRepository: CategoryRepository) : Vi
         var data = MutableLiveData<CategoriesModel>()
     }
 
-    fun getMainCategories() {
+    init {
+        if (!fetched && !trying) getMainCategories()
+    }
+
+    private fun getMainCategories() {
         if (!fetched) {
+            trying = true
             viewModelScope.launch(coroutineContext) {
                 val response = categoryRepository.getMainCategories()
+                fetched = response != null
                 data.postValue(response)
             }
-            fetched = true
+            trying = false
         }
     }
 }

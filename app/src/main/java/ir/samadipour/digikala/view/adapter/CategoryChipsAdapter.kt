@@ -12,13 +12,8 @@ import ir.samadipour.digikala.service.utils.inflate
 import ir.samadipour.digikala.view.activities.CategoryActivity
 import kotlinx.android.synthetic.main.item_list_chip_category.view.*
 
-class CategoryChipsAdapter : RecyclerView.Adapter<CategoryChipsAdapter.ChipViewHolder>() {
-    private var data = emptyList<CategoriesData>()
-
-    fun submit(newData: List<CategoriesData>) {
-        data = newData
-        notifyDataSetChanged()
-    }
+class CategoryChipsAdapter(private var data: List<CategoriesData>) :
+    RecyclerView.Adapter<CategoryChipsAdapter.ChipViewHolder>() {
 
     override fun onBindViewHolder(viewHolder: ChipViewHolder, position: Int) {
         viewHolder.bind(data[position], position)

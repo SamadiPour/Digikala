@@ -8,14 +8,8 @@ import ir.samadipour.digikala.service.utils.inflate
 import ir.samadipour.digikala.view.holder.GridSmallProductHolder
 
 
-class SpecialOfferAdapter : RecyclerView.Adapter<GridSmallProductHolder>() {
-    var data = emptyList<IncredibleOffer>()
-
-    fun submit(newData: List<IncredibleOffer>) {
-        data = newData
-        notifyDataSetChanged()
-    }
-
+class SpecialOfferAdapter(var data: List<IncredibleOffer>) :
+    RecyclerView.Adapter<GridSmallProductHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GridSmallProductHolder =
         GridSmallProductHolder(parent.inflate(R.layout.item_list_product_small_grid))
 

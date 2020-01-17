@@ -13,7 +13,7 @@ import com.google.android.material.navigation.NavigationView
 import ir.samadipour.digikala.R
 import ir.samadipour.digikala.inteface.enum.ProductListSortTypeEnum
 import ir.samadipour.digikala.service.click_listener.BannerClickListener
-import ir.samadipour.digikala.service.models.MidScreenBannerModel
+import ir.samadipour.digikala.service.models.*
 import ir.samadipour.digikala.service.utils.DisplayTools
 import ir.samadipour.digikala.service.utils.InjectUtils
 import ir.samadipour.digikala.view.adapter.CategoryChipsAdapter
@@ -31,23 +31,23 @@ import kotlinx.android.synthetic.main.toolbar_actionbar.view.*
 import kotlin.math.floor
 
 
-class IndexActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class IndexActivity : AppCompatActivity(), Observer<Any?>,
+    NavigationView.OnNavigationItemSelectedListener {
     private lateinit var inflater: LayoutInflater
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_index)
+        inflater = LayoutInflater.from(this)
 
         val indexViewModel = ViewModelProvider(
             this,
             InjectUtils.getIndexActivityViewModelInstance()
         ).get(IndexActivityViewModel::class.java)
-
         val categoryViewModel = ViewModelProvider(
             this,
             InjectUtils.getCategoryViewModelInstance()
         ).get(CategoryViewModel::class.java)
-        categoryViewModel.getMainCategories()
 
         DisplayTools.toolbar(
             this,
@@ -69,85 +69,17 @@ class IndexActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
         indexActivity_navigationView.setNavigationItemSelectedListener(this)
 
         //banner slider
-        val imageSliderAdapter = ImageSliderAdapter(fullScreen = true)
-        imageSlider_banners.sliderAdapter = imageSliderAdapter
-        indexViewModel.getSliderBanner().observe(this, Observer { bannerModel ->
-            if (bannerModel != null)
-                imageSliderAdapter.submit(bannerModel.data.map { it.bannerPathMobile })
-        })
-
+        indexViewModel.getSliderBanner().observe(this, this)
         //category chips
-        val categoryAdapter = CategoryChipsAdapter()
-        chipsView_productCategories.adapter = categoryAdapter
-        CategoryViewModel.data.observe(this, Observer {
-            if (it != null)
-                categoryAdapter.submit(it.data)
-        })
-
+        CategoryViewModel.data.observe(this, this)
         //FullScreenBanner
-        indexViewModel.getFullScreenBanners().observe(this, Observer {
-            if (it != null) {
-                firstFullScreenBanner.setImageURI(it.data[0].bannerPathMobile)
-                firstFullScreenBanner.setOnClickListener(
-                    BannerClickListener(
-                        it.data[0]
-                    )
-                )
-
-                secondFullScreenBanner.setImageURI(it.data[1].bannerPathMobile)
-                secondFullScreenBanner.setOnClickListener(
-                    BannerClickListener(
-                        it.data[1]
-                    )
-                )
-            }
-        })
-
-        //mid screen banner
-        inflater = LayoutInflater.from(this)
-        indexViewModel.getMidScreenBanner().observe(this, Observer {
-            if (it != null) {
-                bindBanners(it)
-            }
-        })
-
-        //incredible offers
-        val specialOfferAdapter = SpecialOfferAdapter()
-        specialOffer_productList.adapter = specialOfferAdapter
-        indexViewModel.getIncredibleOffers().observe(this, Observer {
-            if (it != null)
-                specialOfferAdapter.submit(it.data)
-        })
-
-        //TopSales
-        val topSalesAdapter = ProductListAdapter(isGone = true, showDiscounted = false)
-        topSale_rowList.apply {
-            productListRow_productRecyclerView.adapter = topSalesAdapter
-            productListRow_titleTextView.text = getString(R.string.top_sale_title_text_view)
-            productListRow_moreButton.visibility = View.VISIBLE
-            productListRow_moreButton.setOnClickListener {
-                handleNavigation(R.id.menu_topSellProduct)
-            }
-        }
-
-        //Newest Products
-        val newestProductsAdapter = ProductListAdapter(isGone = true, showDiscounted = false)
-        newestProducts_rowList.apply {
-            productListRow_productRecyclerView.adapter = newestProductsAdapter
-            productListRow_titleTextView.text = getString(R.string.newest_product_title_text_view)
-            productListRow_moreButton.visibility = View.VISIBLE
-            productListRow_moreButton.setOnClickListener {
-                handleNavigation(R.id.menu_newestProducts)
-            }
-        }
-
-        //setting TopSales and Newest data
-        indexViewModel.getGeneralProducts().observe(this, Observer {
-            if (it != null) {
-                topSalesAdapter.submit(it.responses[0].hits.hits)
-                newestProductsAdapter.submit(it.responses[1].hits.hits)
-            }
-        })
+        indexViewModel.getFullScreenBanners().observe(this, this)
+        //mid screen banner request
+        indexViewModel.getMidScreenBanner().observe(this, this)
+        //incredible offers request
+        indexViewModel.getIncredibleOffers().observe(this, this)
+        //TopSales and Newest request
+        indexViewModel.getGeneralProducts().observe(this, this)
 
         //4 categories in below
         val categoryNames = listOf(
@@ -174,6 +106,80 @@ class IndexActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
                     adapter.submit(it.responses[0].hits.hits)
                 }
             })
+        }
+    }
+
+    override fun onChanged(result: Any?) {
+        when (result) {
+            is CategoriesModel -> {
+                //setting category chips
+                val categoryAdapter = CategoryChipsAdapter(result.data)
+                chipsView_productCategories.adapter = categoryAdapter
+            }
+            is MainBannerModel -> {
+                //setting top full screen banner
+                firstFullScreenBanner.setImageURI(result.data[0].bannerPathMobile)
+                firstFullScreenBanner.setOnClickListener(
+                    BannerClickListener(
+                        result.data[0]
+                    )
+                )
+
+                //setting bottom full screen banner
+                secondFullScreenBanner.setImageURI(result.data[1].bannerPathMobile)
+                secondFullScreenBanner.setOnClickListener(
+                    BannerClickListener(
+                        result.data[1]
+                    )
+                )
+            }
+            is MainBannerModel -> {
+                //banner slider
+                val imageSliderAdapter = ImageSliderAdapter(fullScreen = true)
+                imageSlider_banners.sliderAdapter = imageSliderAdapter
+                imageSliderAdapter.submit(result.data.map { it.bannerPathMobile })
+            }
+            is MidScreenBannerModel -> {
+                //creating mid screen banners
+                bindBanners(result)
+            }
+            is IncredibleOfferModel -> {
+                //incredible offers
+                val specialOfferAdapter = SpecialOfferAdapter(result.data)
+                specialOffer_productList.adapter = specialOfferAdapter
+            }
+            is ProductListModel -> {
+                //TopSales
+                val topSalesAdapter =
+                    ProductListAdapter(isGone = true, showDiscounted = false).apply {
+                        submit(result.responses[0].hits.hits)
+                    }
+                topSale_rowList.apply {
+                    //making full list button visible
+                    productListRow_productRecyclerView.adapter = topSalesAdapter
+                    productListRow_titleTextView.text = getString(R.string.top_sale_title_text_view)
+                    productListRow_moreButton.visibility = View.VISIBLE
+                    productListRow_moreButton.setOnClickListener {
+                        handleNavigation(R.id.menu_topSellProduct)
+                    }
+                }
+
+                //Newest Products
+                val newestProductsAdapter =
+                    ProductListAdapter(isGone = true, showDiscounted = false).apply {
+                        submit(result.responses[1].hits.hits)
+                    }
+                newestProducts_rowList.apply {
+                    //making full list button visible
+                    productListRow_productRecyclerView.adapter = newestProductsAdapter
+                    productListRow_titleTextView.text =
+                        getString(R.string.newest_product_title_text_view)
+                    productListRow_moreButton.visibility = View.VISIBLE
+                    productListRow_moreButton.setOnClickListener {
+                        handleNavigation(R.id.menu_newestProducts)
+                    }
+                }
+            }
         }
     }
 
@@ -223,10 +229,6 @@ class IndexActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
                 destination = ProductsListActivity::class.java
                 bundle.putParcelable("type", ProductListSortTypeEnum.NEWEST)
             }
-//            R.id.menu_incredibleOffer -> {
-//                destination = ProductsListActivity::class.java
-//                bundle.putParcelable("type", ProductListTypeEnum.INCREDIBLE_OFFER)
-//            }
             else -> return false
         }
         val intent = Intent(this, destination)
