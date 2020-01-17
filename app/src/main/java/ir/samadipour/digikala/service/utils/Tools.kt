@@ -21,23 +21,23 @@ import java.util.concurrent.TimeUnit
 
 
 object DateTimeTools {
-    fun getNextDay(): Calendar {
-        return Calendar.getInstance(TimeZone.getDefault()).apply {
-            add(Calendar.DAY_OF_MONTH, 1)
-            set(
-                get(Calendar.YEAR),
-                get(Calendar.MONTH),
-                get(Calendar.DATE),
-                0,
-                0,
-                0
-            )
-        }
+    fun getNextDay(
+        calendar: Calendar = getNow()
+    ): Calendar = (calendar.clone() as Calendar).apply {
+        set(
+            get(Calendar.YEAR),
+            get(Calendar.MONTH),
+            get(Calendar.DATE),
+            23,
+            59,
+            59
+        )
     }
+
+    fun getNow() = Calendar.getInstance(TimeZone.getDefault())
 }
 
 object InternetTools {
-    //todo: need some test - http://..., https://..., ://..., wrong url, //..., /...
     fun openBrowserWith(context: Context, url: String) {
         //check if it has scheme like http, https, file and ...
         var finalUrl = url
@@ -49,7 +49,6 @@ object InternetTools {
         if (browserIntent.resolveActivity(context.packageManager) != null) {
             startActivity(context, browserIntent, null)
         } else {
-            //todo: should consider smt else!!!!
             context.toast(context.resources.getString(R.string.no_browser_found))
         }
     }
