@@ -105,7 +105,10 @@ class ProductDetailActivity : AppCompatActivity(), Observer<Any?>, Toolbar.OnMen
                 //setting listener for share button
                 binding.shareProductDetail.setOnClickListener {
                     val shareText =
-                        "${result.data.faTitle}\n" + getString(R.string.share_link, productId)
+                        "${result.data.faTitle}\n" + getString(R.string.share_link).replace(
+                            "PRODUCTID",
+                            result.data.productId.toString()
+                        )
                     startActivity(
                         Intent.createChooser(
                             Intent(Intent.ACTION_SEND).apply {
