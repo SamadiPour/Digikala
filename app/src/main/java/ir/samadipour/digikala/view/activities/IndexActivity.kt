@@ -2,6 +2,7 @@ package ir.samadipour.digikala.view.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -39,12 +40,18 @@ class IndexActivity : AppCompatActivity(), Observer<Any?>,
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_index)
         inflater = LayoutInflater.from(this)
+        DisplayTools.switchVisibility(rootView_indexActivity, splashScreen_indexActivity, false)
+        Handler().postDelayed({
+            DisplayTools.switchVisibility(rootView_indexActivity, splashScreen_indexActivity, false)
+        }, 3000)
 
         val indexViewModel = ViewModelProvider(
             this,
             InjectUtils.getIndexActivityViewModelInstance()
         ).get(IndexActivityViewModel::class.java)
-        val categoryViewModel = ViewModelProvider(
+
+        //requesting category
+        ViewModelProvider(
             this,
             InjectUtils.getCategoryViewModelInstance()
         ).get(CategoryViewModel::class.java)
@@ -69,7 +76,15 @@ class IndexActivity : AppCompatActivity(), Observer<Any?>,
         indexActivity_navigationView.setNavigationItemSelectedListener(this)
 
         //banner slider
-        indexViewModel.getSliderBanner().observe(this, this)
+        indexViewModel.getSliderBanner().observe(this, Observer { bannerModel ->
+            if (bannerModel != null) {
+                val imageSliderAdapter = ImageSliderAdapter(fullScreen = true)
+                imageSlider_banners.sliderAdapter = imageSliderAdapter
+                imageSliderAdapter.submit(bannerModel.data.map { it.bannerPathMobile })
+            }
+        })
+
+
         //category chips
         CategoryViewModel.data.observe(this, this)
         //FullScreenBanner
@@ -132,12 +147,6 @@ class IndexActivity : AppCompatActivity(), Observer<Any?>,
                         result.data[1]
                     )
                 )
-            }
-            is MainBannerModel -> {
-                //banner slider
-                val imageSliderAdapter = ImageSliderAdapter(fullScreen = true)
-                imageSlider_banners.sliderAdapter = imageSliderAdapter
-                imageSliderAdapter.submit(result.data.map { it.bannerPathMobile })
             }
             is MidScreenBannerModel -> {
                 //creating mid screen banners
