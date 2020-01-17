@@ -26,4 +26,6 @@
     <string name="product_rate">%1$.1f از 5</string>
     <string name="continue_description">ادامه مطلب</string>
     <string name="close_description">بستن</string>
+    <string name="share_link">https://vtpd.adj.st/?adjust_t=mk5b2y&amp;adjust_deeplink=dkapp%3A%2F%2Fwww.digikala.com%2FProduct%2Fdkp-%1$s&amp;adjust_redirect=https://www.digikala.com/Product/dkp-%1$s</string>
+    <string name="share_title">اشتراک محصول</string>
 </resources>

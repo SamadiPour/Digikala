@@ -57,16 +57,16 @@ class ProductDetailActivity : AppCompatActivity(), Observer<Any?>, Toolbar.OnMen
         }
     }
 
-    override fun onChanged(data: Any?) {
-        when (data) {
+    override fun onChanged(result: Any?) {
+        when (result) {
             is ProductModel -> {
-                binding.product = data.data
+                binding.product = result.data
 
                 //changing toolbar
                 DisplayTools.toolbar(
                     this,
                     showTitle = true,
-                    title = data.data.faTitle,
+                    title = result.data.faTitle,
                     titleSize = 14f,
                     showMenu = true
                 )
@@ -74,12 +74,12 @@ class ProductDetailActivity : AppCompatActivity(), Observer<Any?>, Toolbar.OnMen
                 //set average rate
                 binding.ratingProductDetail.text = getString(
                     R.string.product_rate,
-                    data.data.rate.toFloat() * 5 / 100
+                    result.data.rate.toFloat() * 5 / 100
                 )
-                binding.ratingBarProductDetail.rating = data.data.rate.toFloat() * 5 / 100
+                binding.ratingBarProductDetail.rating = result.data.rate.toFloat() * 5 / 100
 
                 //special offer timer
-                if (data.data.isSpecialOffer) DisplayTools.handleCountDownTimer(
+                if (result.data.isSpecialOffer) DisplayTools.handleCountDownTimer(
                     hourCounter_productTextView,
                     minuteCounter_productTextView,
                     secondCounter_productTextView
@@ -101,42 +101,57 @@ class ProductDetailActivity : AppCompatActivity(), Observer<Any?>, Toolbar.OnMen
                         )
                     }
                 }
+
+                //setting listener for share button
+                binding.shareProductDetail.setOnClickListener {
+                    val shareText =
+                        "${result.data.faTitle}\n" + getString(R.string.share_link, productId)
+                    startActivity(
+                        Intent.createChooser(
+                            Intent(Intent.ACTION_SEND).apply {
+                                type = "text/plain"
+                                putExtra(Intent.EXTRA_TEXT, shareText)
+                            },
+                            getString(R.string.share_title)
+                        )
+                    )
+                }
             }
             is ProductRateModel -> {
-                val rateAdapter = RateAdapter(data.data.categoryRateInfos[0].rateFactorInfos)
+                val rateAdapter = RateAdapter(result.data.categoryRateInfos[0].rateFactorInfos)
                 ratingRecyclerView_productDetail.adapter = rateAdapter
             }
             is ProductAlbumModel -> {
                 //slider images
                 val imageSliderAdapter = ImageSliderAdapter(fullScreen = false)
                 imageSlider_productDetail.sliderAdapter = imageSliderAdapter
-                imageSliderAdapter.submit(data.data.map { it.imagePaths.original })
+                imageSliderAdapter.submit(result.data.map { it.imagePaths.original })
             }
             is ProductConfigModel -> {
-                binding.productConfig = data.data
+                binding.productConfig = result.data
 
                 //create Colors/Size list
                 when {
-                    data.data.sizes != null -> {
-                        if (data.data.sizes.isNotEmpty()) {
+                    result.data.sizes != null -> {
+                        if (result.data.sizes.isNotEmpty()) {
                             binding.colorSizeRecyclerViewProductDetail.adapter =
-                                ProductDetailColorSizeAdapter(data.data.sizes)
+                                ProductDetailColorSizeAdapter(result.data.sizes)
                         }
                         colorSizeText_ProductDetail.text = getString(R.string.size)
                         colorSizeCount_ProductDetail.text = getString(
                             R.string.size_count,
-                            data.data.sizes.size
+                            result.data.sizes.size
                         )
                     }
-                    data.data.colors != null -> {
-                        if (data.data.colors.isNotEmpty()) {
+                    result.data.colors != null -> {
+                        if (result.data.colors.isNotEmpty()) {
                             binding.colorSizeRecyclerViewProductDetail.adapter =
-                                ProductDetailColorSizeAdapter(data.data.colors)
+                                ProductDetailColorSizeAdapter(result.data.colors)
                         }
                         colorSizeText_ProductDetail.text = getString(R.string.color)
                         colorSizeCount_ProductDetail.text = getString(
                             R.string.color_count,
-                            data.data.colors.size
+                            result.data.colors.size
                         )
                     }
                     else -> {
@@ -148,35 +163,35 @@ class ProductDetailActivity : AppCompatActivity(), Observer<Any?>, Toolbar.OnMen
                 //setting price
                 binding.minPriceProductDetail.text = getString(
                     R.string.price_text,
-                    DisplayTools.priceFormatter(data.data.configViewModel.payable)
+                    DisplayTools.priceFormatter(result.data.configViewModel.payable)
                 )
-                if (data.data.configViewModel.discount != 0) {
+                if (result.data.configViewModel.discount != 0) {
                     binding.maxPriceProductDetail.apply {
                         text = getString(
                             R.string.price_text,
-                            DisplayTools.priceFormatter(data.data.configViewModel.price)
+                            DisplayTools.priceFormatter(result.data.configViewModel.price)
                         )
                         strikeThrough()
                     }
                 }
 
                 //seller info
-                if (data.data.configViewModel.id == 1) {
+                if (result.data.configViewModel.id == 1) {
                     sellerInfoText_productDetail.text = getString(
                         R.string.seller_info,
-                        data.data.configViewModel.seller.fullName
+                        result.data.configViewModel.seller.fullName
                     )
                 } else {
-                    if (data.data.configViewModel.sellerRating == 0)
+                    if (result.data.configViewModel.sellerRating == 0)
                         sellerInfoText_productDetail.text = getString(
                             R.string.seller_info,
-                            data.data.configViewModel.seller.fullName
+                            result.data.configViewModel.seller.fullName
                         )
                     else
                         sellerInfoText_productDetail.text = getString(
                             R.string.seller_info_with_detail,
-                            data.data.configViewModel.seller.fullName,
-                            data.data.configViewModel.sellerRating.toString() + '%'
+                            result.data.configViewModel.seller.fullName,
+                            result.data.configViewModel.sellerRating.toString() + '%'
                         )
                 }
             }
